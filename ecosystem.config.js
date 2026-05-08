@@ -6,6 +6,8 @@ module.exports = {
             watch: false,
             instances: process.env.API_INSTANCES || 1,
             merge_logs: true,
+            out_file: '/dev/null',
+            error_file: '/dev/null',
             exec_mode: 'cluster',
             instance_var: 'INSTANCE_ID',
             env_development: {
@@ -25,6 +27,8 @@ module.exports = {
             instances: 1, // DO NOT SCALE
             exec_mode: 'fork',
             merge_logs: true,
+            out_file: '/dev/null',
+            error_file: '/dev/null',
             instance_var: 'INSTANCE_ID',
             env_development: {
                 NODE_ENV: 'development',
@@ -43,6 +47,8 @@ module.exports = {
             instances: process.env.WORKER_INSTANCES || 1,
             exec_mode: 'cluster',
             merge_logs: true,
+            out_file: '/dev/null',
+            error_file: '/dev/null',
             instance_var: 'INSTANCE_ID',
             env_development: {
                 NODE_ENV: 'development',
