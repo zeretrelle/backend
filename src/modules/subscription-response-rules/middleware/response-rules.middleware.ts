@@ -49,7 +49,7 @@ export class ResponseRulesMiddleware implements NestMiddleware {
                 );
             }
 
-            const headersToAppend: Record<string, string> = {
+            const headersToAppend: Record<string, string | string[]> = {
                 'x-remnawave-injected-short-uuid': req.params.shortUuid,
             };
 
