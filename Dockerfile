@@ -88,13 +88,11 @@ ENV __RW_METADATA_BUILD_NUMBER=${__RW_METADATA_BUILD_NUMBER}
 COPY --from=backend-build /opt/app/dist ./dist
 COPY --from=frontend /opt/frontend/frontend_temp/dist ./frontend
 COPY --from=backend-build /opt/app/prisma ./prisma
-COPY --from=backend-build /opt/app/patches ./patches
 COPY --from=backend-build /opt/app/node_modules ./node_modules
 
 COPY configs /var/lib/remnawave/configs
 COPY package*.json ./
 COPY prisma.config.ts ./prisma.config.ts
-COPY libs ./libs
 
 COPY ecosystem.config.js ./
 COPY docker-entrypoint.sh ./
