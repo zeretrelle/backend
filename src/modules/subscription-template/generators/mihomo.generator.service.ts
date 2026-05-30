@@ -35,6 +35,8 @@ interface Hysteria2FinalMask {
             ports?: string | number;
             interval?: string | number;
         };
+        bbrProfile?: string;
+        congestion?: string;
     };
     udp?: Array<{
         type?: string;
@@ -620,22 +622,16 @@ export class MihomoGeneratorService {
     private buildHysteria2QuicFields(
         finalMask: Record<string, unknown> | null,
     ): Record<string, unknown> {
-        const { brutalUp, brutalDown, udpHop } =
+        const { brutalUp, brutalDown, udpHop, bbrProfile } =
             (finalMask as Hysteria2FinalMask | null)?.quicParams ?? {};
-        const hopInterval = this.parseHopInterval(udpHop?.interval);
 
         return {
             ...(brutalUp && { up: String(brutalUp) }),
             ...(brutalDown && { down: String(brutalDown) }),
             ...(udpHop?.ports && { ports: String(udpHop.ports) }),
-            ...(hopInterval !== null && { 'hop-interval': hopInterval }),
+            ...(udpHop?.interval && { 'hop-interval': String(udpHop.interval) }),
+            ...(bbrProfile && { 'bbr-profile': bbrProfile }),
         };
-    }
-
-    private parseHopInterval(interval: string | number | undefined): number | null {
-        if (interval === undefined) return null;
-        const parsed = parseInt(String(interval).split('-')[0], 10);
-        return isNaN(parsed) ? null : parsed;
     }
 
     private buildHysteria2ObfsFields(
