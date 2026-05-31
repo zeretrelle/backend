@@ -76,7 +76,7 @@ const XHTTP_FIELD_MAP: [string, string, boolean?][] = [
     ['xPaddingHeader', 'x-padding-header'],
     ['xPaddingPlacement', 'x-padding-placement'],
     ['xPaddingMethod', 'x-padding-method'],
-    ['uplinkHttpMethod', 'uplink-http-method'],
+    ['uplinkHTTPMethod', 'uplink-http-method'],
     ['sessionPlacement', 'session-placement'],
     ['sessionKey', 'session-key'],
     ['seqPlacement', 'seq-placement'],
