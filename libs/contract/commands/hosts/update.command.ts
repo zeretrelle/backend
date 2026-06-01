@@ -85,7 +85,7 @@ export namespace UpdateHostCommand {
         overrideSniFromAddress: z.optional(z.boolean()),
         keepSniBlank: z.optional(z.boolean()),
         vlessRouteId: z.optional(z.number().int().min(0).max(65535).nullable()),
-        allowInsecure: z.optional(z.boolean()),
+        pinnedPeerCertSha256: z.optional(z.string().nullable()),
         shuffleHost: z.optional(z.boolean()),
         mihomoX25519: z.optional(z.boolean()),
         nodes: z.optional(z.array(z.string().uuid())),

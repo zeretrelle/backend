@@ -233,7 +233,8 @@ export class MihomoGeneratorService {
                     node.alpn = opts.alpn.split(',');
                 }
 
-                if (opts.allowInsecure && node.type !== 'ss') {
+                // allowInsecure
+                if (opts.pinnedPeerCertSha256 && node.type !== 'ss') {
                     node['skip-cert-verify'] = true;
                 }
                 break;
@@ -647,11 +648,11 @@ export class MihomoGeneratorService {
 
     private buildHysteria2TlsFields(host: ResolvedProxyConfig): Record<string, unknown> {
         if (host.security !== 'tls') return {};
-        const { serverName, allowInsecure, fingerprint, alpn } = host.securityOptions;
+        const { serverName, pinnedPeerCertSha256, fingerprint, alpn } = host.securityOptions;
 
         return {
             ...(serverName && { sni: serverName }),
-            ...(allowInsecure && { 'skip-cert-verify': true }),
+            ...(pinnedPeerCertSha256 && { 'skip-cert-verify': true }),
             ...(fingerprint && { 'client-fingerprint': fingerprint }),
             ...(alpn && { alpn: alpn.split(',') }),
         };

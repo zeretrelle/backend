@@ -378,7 +378,6 @@ export class ResolveProxyConfigService {
                 return {
                     security: 'tls',
                     securityOptions: {
-                        allowInsecure: inputHost.allowInsecure,
                         alpn,
                         enableSessionResumption: !!tls?.enableSessionResumption,
                         fingerprint: override(inputHost.fingerprint, tls?.fingerprint) ?? 'chrome',
@@ -389,6 +388,7 @@ export class ResolveProxyConfigService {
                         ),
                         echConfigList: tls?.echConfigList || null,
                         echForceQuery: tls?.echForceQuery || null,
+                        pinnedPeerCertSha256: inputHost.pinnedPeerCertSha256,
                     },
                 };
             }

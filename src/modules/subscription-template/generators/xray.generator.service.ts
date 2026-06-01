@@ -316,7 +316,7 @@ export class XrayGeneratorService {
         }
     }
 
-    // 4.4 TLS: sni, fp, alpn, allowInsecure
+    // 4.4 TLS: sni, fp, alpn, pcs
     private applyTlsParams(
         params: Record<string, unknown>,
         host: Extract<ResolvedProxyConfig, { security: 'tls' }>,
@@ -338,8 +338,8 @@ export class XrayGeneratorService {
             params.alpn = opts.alpn;
         }
 
-        if (opts.allowInsecure) {
-            params.allowInsecure = 1;
+        if (opts.pinnedPeerCertSha256) {
+            params.pcs = opts.pinnedPeerCertSha256;
         }
     }
 

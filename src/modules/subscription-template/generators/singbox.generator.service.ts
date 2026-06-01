@@ -247,7 +247,8 @@ export class SingBoxGeneratorService {
             };
         }
 
-        if (opts.allowInsecure) {
+        // allowInsecure
+        if (opts.pinnedPeerCertSha256) {
             config.insecure = true;
         }
 

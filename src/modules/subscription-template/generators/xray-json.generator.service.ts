@@ -150,8 +150,8 @@ function buildTlsSettings(host: ResolvedProxyConfig): Record<string, unknown> {
         settings.alpn = host.securityOptions.alpn.split(',');
     }
 
-    if (host.securityOptions.allowInsecure) {
-        settings.allowInsecure = true;
+    if (host.securityOptions.pinnedPeerCertSha256) {
+        settings.pcs = host.securityOptions.pinnedPeerCertSha256;
     }
 
     if (host.securityOptions.echForceQuery) {

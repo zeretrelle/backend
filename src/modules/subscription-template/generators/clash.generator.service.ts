@@ -141,7 +141,8 @@ export class ClashGeneratorService {
                     node.alpn = opts.alpn.split(',');
                 }
 
-                if (opts.allowInsecure) {
+                // allowInsecure
+                if (opts.pinnedPeerCertSha256) {
                     node['skip-cert-verify'] = true;
                 }
                 break;
