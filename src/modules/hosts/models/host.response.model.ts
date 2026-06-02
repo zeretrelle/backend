@@ -1,4 +1,8 @@
-import { TSecurityLayers, TSubscriptionTemplateType } from '@libs/contracts/constants';
+import {
+    TMihomoIpVersion,
+    TSecurityLayers,
+    TSubscriptionTemplateType,
+} from '@libs/contracts/constants';
 
 import { HostsEntity } from '../entities/hosts.entity';
 
@@ -26,7 +30,7 @@ export class HostResponseModel {
 
     public shuffleHost: boolean;
     public mihomoX25519: boolean;
-
+    public mihomoIpVersion: TMihomoIpVersion | null;
     public tag: null | string;
     public isHidden: boolean;
 
@@ -70,6 +74,7 @@ export class HostResponseModel {
         this.verifyPeerCertByName = data.verifyPeerCertByName;
         this.shuffleHost = data.shuffleHost;
         this.mihomoX25519 = data.mihomoX25519;
+        this.mihomoIpVersion = data.mihomoIpVersion;
 
         this.tag = data.tag;
         this.isHidden = data.isHidden;

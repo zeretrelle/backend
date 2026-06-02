@@ -34,7 +34,7 @@ const entityToModel = (entity: HostsEntity): Hosts => {
         verifyPeerCertByName: entity.verifyPeerCertByName,
         shuffleHost: entity.shuffleHost,
         mihomoX25519: entity.mihomoX25519,
-
+        mihomoIpVersion: entity.mihomoIpVersion,
         tag: entity.tag,
         isHidden: entity.isHidden,
 

@@ -57,6 +57,7 @@ interface ProxyNode {
     servername?: string;
     'skip-cert-verify'?: boolean;
     'packet-encoding'?: string;
+    'ip-version'?: string;
     sni?: string;
     tls?: boolean;
     type: string;
@@ -161,6 +162,7 @@ export class MihomoGeneratorService {
             port: host.port,
             network: this.resolveClashNetwork(host),
             udp: true,
+            'ip-version': host.clientOverrides.mihomoIpVersion ?? undefined,
         };
 
         if (!this.applyProtocolFields(node, host)) {

@@ -6,6 +6,7 @@ import {
     SECURITY_LAYERS,
     ALPN,
     SUBSCRIPTION_TEMPLATE_TYPE,
+    MIHOMO_IP_VERSION,
 } from '../../constants';
 import { HOSTS_ROUTES, REST_API } from '../../api';
 import { HostsSchema } from '../../models';
@@ -89,6 +90,7 @@ export namespace UpdateHostCommand {
         verifyPeerCertByName: z.optional(z.string().nullable()),
         shuffleHost: z.optional(z.boolean()),
         mihomoX25519: z.optional(z.boolean()),
+        mihomoIpVersion: z.optional(z.nativeEnum(MIHOMO_IP_VERSION).nullable()),
         nodes: z.optional(z.array(z.string().uuid())),
         xrayJsonTemplateUuid: z.optional(z.string().uuid().nullable()),
         excludedInternalSquads: z

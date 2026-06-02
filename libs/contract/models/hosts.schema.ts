@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
+import { MIHOMO_IP_VERSION, SECURITY_LAYERS } from '../constants/hosts';
 import { SUBSCRIPTION_TEMPLATE_TYPE } from '../constants';
-import { SECURITY_LAYERS } from '../constants/hosts';
 
 export const HostsSchema = z.object({
     uuid: z.string().uuid(),
@@ -36,6 +36,7 @@ export const HostsSchema = z.object({
     verifyPeerCertByName: z.string().nullable(),
     shuffleHost: z.boolean(),
     mihomoX25519: z.boolean(),
+    mihomoIpVersion: z.nativeEnum(MIHOMO_IP_VERSION).nullable(),
 
     nodes: z.array(z.string().uuid()),
     xrayJsonTemplateUuid: z.string().uuid().nullable(),

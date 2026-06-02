@@ -6,6 +6,7 @@ import {
     SECURITY_LAYERS,
     ALPN,
     SUBSCRIPTION_TEMPLATE_TYPE,
+    MIHOMO_IP_VERSION,
 } from '../../constants';
 import { HOSTS_ROUTES, REST_API } from '../../api';
 import { HostsSchema } from '../../models';
@@ -85,6 +86,7 @@ export namespace CreateHostCommand {
         vlessRouteId: z.optional(z.number().int().min(0).max(65535).nullable()),
         shuffleHost: z.optional(z.boolean().default(false)),
         mihomoX25519: z.optional(z.boolean().default(false)),
+        mihomoIpVersion: z.optional(z.nativeEnum(MIHOMO_IP_VERSION).nullable()),
         nodes: z.optional(z.array(z.string().uuid())),
         xrayJsonTemplateUuid: z.optional(z.string().uuid().nullable()),
         excludedInternalSquads: z

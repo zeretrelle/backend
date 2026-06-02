@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { SUBSCRIPTION_TEMPLATE_TYPE } from '../constants';
+import { MIHOMO_IP_VERSION, SUBSCRIPTION_TEMPLATE_TYPE } from '../constants';
 
 export const VlessProtocolOptionsSchema = z.object({
     encryption: z.string(),
@@ -93,6 +93,7 @@ export const HysteriaTransportOptionsSchema = z.object({
 export const TlsSecurityOptionsSchema = z.object({
     pinnedPeerCertSha256: z.string().nullable(),
     verifyPeerCertByName: z.string().nullable(),
+    mihomoIpVersion: z.nativeEnum(MIHOMO_IP_VERSION).nullable(),
     alpn: z.string().nullable(),
     enableSessionResumption: z.boolean(),
     fingerprint: z.string().nullable(),
