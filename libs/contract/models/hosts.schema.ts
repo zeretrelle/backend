@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { MIHOMO_IP_VERSION, SECURITY_LAYERS } from '../constants/hosts';
+import { ALPN, MIHOMO_IP_VERSION, SECURITY_LAYERS } from '../constants/hosts';
 import { SUBSCRIPTION_TEMPLATE_TYPE } from '../constants';
 
 export const HostsSchema = z.object({
@@ -12,9 +12,9 @@ export const HostsSchema = z.object({
     path: z.string().nullable(),
     sni: z.string().nullable(),
     host: z.string().nullable(),
-    alpn: z.string().nullable(),
+    alpn: z.nativeEnum(ALPN).nullable(),
     fingerprint: z.string().nullable(),
-    isDisabled: z.boolean().default(false),
+    isDisabled: z.boolean(),
     securityLayer: z.nativeEnum(SECURITY_LAYERS).default(SECURITY_LAYERS.DEFAULT),
     xHttpExtraParams: z.nullable(z.unknown()),
     muxParams: z.nullable(z.unknown()),
@@ -41,5 +41,5 @@ export const HostsSchema = z.object({
     nodes: z.array(z.string().uuid()),
     xrayJsonTemplateUuid: z.string().uuid().nullable(),
     excludedInternalSquads: z.array(z.string().uuid()),
-    excludeFromSubscriptionTypes: z.array(z.nativeEnum(SUBSCRIPTION_TEMPLATE_TYPE)).optional(),
+    excludeFromSubscriptionTypes: z.array(z.nativeEnum(SUBSCRIPTION_TEMPLATE_TYPE)),
 });

@@ -398,16 +398,6 @@ export const ERRORS = {
         message: 'Bulk disable hosts error',
         httpCode: 500,
     },
-    SET_INBOUND_TO_HOSTS_ERROR: {
-        code: 'A082',
-        message: 'Set inbound to hosts error',
-        httpCode: 500,
-    },
-    SET_PORT_TO_HOSTS_ERROR: {
-        code: 'A083',
-        message: 'Set port to hosts error',
-        httpCode: 500,
-    },
     BULK_DELETE_USERS_BY_UUID_ERROR: {
         code: 'A084',
         message: 'Bulk delete users by UUID error',
@@ -1142,6 +1132,11 @@ export const ERRORS = {
     GET_TORRENT_BLOCKER_REPORTS_ERROR: {
         code: 'A227',
         message: 'Get torrent blocker reports error',
+        httpCode: 500,
+    },
+    UPDATE_HOSTS_ERROR: {
+        code: 'A228',
+        message: 'Update hosts error',
         httpCode: 500,
     },
 } as const;

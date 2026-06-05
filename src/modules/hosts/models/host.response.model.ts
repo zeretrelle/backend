@@ -1,4 +1,5 @@
 import {
+    TAlpnValues,
     TMihomoIpVersion,
     TSecurityLayers,
     TSubscriptionTemplateType,
@@ -16,7 +17,7 @@ export class HostResponseModel {
     public path: null | string;
     public sni: null | string;
     public host: null | string;
-    public alpn: null | string;
+    public alpn: null | TAlpnValues;
     public fingerprint: null | string;
     public isDisabled: boolean;
     public securityLayer: TSecurityLayers;
@@ -60,7 +61,7 @@ export class HostResponseModel {
         this.path = data.path;
         this.sni = data.sni;
         this.host = data.host;
-        this.alpn = data.alpn;
+        this.alpn = data.alpn as TAlpnValues | null;
         this.fingerprint = data.fingerprint;
 
         this.isDisabled = data.isDisabled;

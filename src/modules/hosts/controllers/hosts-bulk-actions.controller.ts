@@ -8,11 +8,10 @@ import { RolesGuard } from '@common/guards/roles/roles.guard';
 import { Endpoint } from '@common/decorators/base-endpoint';
 import { Roles } from '@common/decorators/roles/roles';
 import {
-    BulkDeleteHostsCommand,
     BulkDisableHostsCommand,
     BulkEnableHostsCommand,
-    SetInboundToManyHostsCommand,
-    SetPortToManyHostsCommand,
+    BulkDeleteHostsCommand,
+    UpdateManyHostsCommand,
 } from '@libs/contracts/commands';
 import { CONTROLLERS_INFO, HOSTS_CONTROLLER } from '@libs/contracts/api';
 import { ROLE } from '@libs/contracts/constants';
@@ -24,10 +23,8 @@ import {
     BulkDisableHostsResponseDto,
     BulkEnableHostsRequestDto,
     BulkEnableHostsResponseDto,
-    SetInboundToManyHostsRequestDto,
-    SetInboundToManyHostsResponseDto,
-    SetPortToManyHostsRequestDto,
-    SetPortToManyHostsResponseDto,
+    UpdateManyHostsRequestDto,
+    UpdateManyHostsResponseDto,
 } from '../dtos/bulk-operations.dto';
 import { HostsService } from '../hosts.service';
 import { HostResponseModel } from '../models';
@@ -99,40 +96,17 @@ export class HostsBulkActionsController {
     }
 
     @ApiOkResponse({
-        type: SetInboundToManyHostsResponseDto,
-        description: 'Hosts inbound set successfully',
+        type: UpdateManyHostsResponseDto,
+        description: 'Hosts updated successfully',
     })
     @Endpoint({
-        command: SetInboundToManyHostsCommand,
-        httpCode: HttpStatus.OK,
-    })
-    async setInboundToHosts(
-        @Body() body: SetInboundToManyHostsRequestDto,
-    ): Promise<SetInboundToManyHostsResponseDto> {
-        const result = await this.hostsService.setInboundToHosts(
-            body.uuids,
-            body.configProfileUuid,
-            body.configProfileInboundUuid,
-        );
-
-        const data = errorHandler(result);
-        return {
-            response: data.map((host) => new HostResponseModel(host)),
-        };
-    }
-
-    @ApiOkResponse({
-        type: SetPortToManyHostsResponseDto,
-        description: 'Hosts port set successfully',
-    })
-    @Endpoint({
-        command: SetPortToManyHostsCommand,
+        command: UpdateManyHostsCommand,
         httpCode: HttpStatus.OK,
     })
     async setPortToHosts(
-        @Body() body: SetPortToManyHostsRequestDto,
-    ): Promise<SetPortToManyHostsResponseDto> {
-        const result = await this.hostsService.setPortToHosts(body.uuids, body.port);
+        @Body() body: UpdateManyHostsRequestDto,
+    ): Promise<UpdateManyHostsResponseDto> {
+        const result = await this.hostsService.updateManyHosts(body);
 
         const data = errorHandler(result);
         return {

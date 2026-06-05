@@ -44,25 +44,24 @@ export namespace CreateHostCommand {
                 invalid_type_error: 'Port must be an integer',
             })
             .int(),
-        path: z.string().optional(),
-        sni: z.string().optional(),
-        host: z.string().optional(),
-        alpn: z.optional(z.nativeEnum(ALPN).nullable()),
-        fingerprint: z.optional(z.string().nullable()),
+        path: z.string().nullish(),
+        sni: z.string().nullish(),
+        host: z.string().nullish(),
+        alpn: z.nativeEnum(ALPN).nullish(),
+        fingerprint: z.string().nullish(),
         isDisabled: z.optional(z.boolean().default(false)),
         securityLayer: z.optional(z.nativeEnum(SECURITY_LAYERS).default(SECURITY_LAYERS.DEFAULT)),
-        xHttpExtraParams: z.optional(z.nullable(z.unknown())),
-        muxParams: z.optional(z.nullable(z.unknown())),
-        sockoptParams: z.optional(z.nullable(z.unknown())),
-        finalMask: z.optional(z.nullable(z.unknown())),
-        serverDescription: z.optional(
-            z
-                .string()
-                .max(30, {
-                    message: 'Server description must be less than 30 characters',
-                })
-                .nullable(),
-        ),
+        xHttpExtraParams: z.unknown().nullish(),
+        muxParams: z.unknown().nullish(),
+        sockoptParams: z.unknown().nullish(),
+        finalMask: z.unknown().nullish(),
+        serverDescription: z
+            .string()
+            .max(30, {
+                message: 'Server description must be less than 30 characters',
+            })
+            .nullish(),
+
         tags: z.optional(
             z
                 .array(
@@ -79,14 +78,14 @@ export namespace CreateHostCommand {
         isHidden: z.optional(z.boolean().default(false)),
         overrideSniFromAddress: z.optional(z.boolean().default(false)),
         keepSniBlank: z.optional(z.boolean().default(false)),
-        pinnedPeerCertSha256: z.optional(z.string().nullable()),
-        verifyPeerCertByName: z.optional(z.string().nullable()),
-        vlessRouteId: z.optional(z.number().int().min(0).max(65535).nullable()),
+        pinnedPeerCertSha256: z.string().nullish(),
+        verifyPeerCertByName: z.string().nullish(),
+        vlessRouteId: z.number().int().min(0).max(65535).nullish(),
         shuffleHost: z.optional(z.boolean().default(false)),
         mihomoX25519: z.optional(z.boolean().default(false)),
-        mihomoIpVersion: z.optional(z.nativeEnum(MIHOMO_IP_VERSION).nullable()),
+        mihomoIpVersion: z.nativeEnum(MIHOMO_IP_VERSION).nullish(),
         nodes: z.optional(z.array(z.string().uuid())),
-        xrayJsonTemplateUuid: z.optional(z.string().uuid().nullable()),
+        xrayJsonTemplateUuid: z.string().uuid().nullish(),
         excludedInternalSquads: z
             .optional(z.array(z.string().uuid()))
             .describe('Optional. Internal squads from which the host will be excluded.'),
