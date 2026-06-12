@@ -607,20 +607,13 @@ async function generateEncryptionKeys() {
 
         const recipient = await identityToRecipient(identity);
 
-        consola.success('✅ Key pair generated successfully.');
+        consola.success(`✅ ${method} key pair generated successfully.`);
 
-        consola.box(
-            `age key pair (${method})\n\n` +
-                `PUBLIC KEY (recipient)\n` +
-                `Put this into the response rule "encryption.key":\n` +
-                `${recipient}\n\n` +
-                `PRIVATE KEY (identity)\n` +
-                `Keep it secret — the client uses it to decrypt the response:\n` +
-                `${identity}`,
+        consola.info(
+            `\nPUBLIC KEY (recipient) — put this into the response rule "encryption.key":\n${recipient}`,
         );
-
-        consola.warn(
-            'Store the PRIVATE KEY securely. Anyone who has it can decrypt the subscription responses.',
+        consola.info(
+            `\nPRIVATE KEY (identity) — keep it secret, the client uses it to decrypt the response:\n${identity}`,
         );
 
         process.exit(0);
