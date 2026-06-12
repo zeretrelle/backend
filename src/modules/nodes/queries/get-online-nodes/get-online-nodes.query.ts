@@ -6,6 +6,7 @@ import { TResult } from '@common/types';
 export interface IGetOnlineNodesPartialResponse {
     uuid: string;
     consumptionMultiplier: bigint;
+    nodeConsumptionMultiplier: bigint;
     id: bigint;
     connectionOpts: INodeConnectionOpts;
 }

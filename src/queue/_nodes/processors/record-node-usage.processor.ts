@@ -8,6 +8,7 @@ import { CommandBus } from '@nestjs/cqrs';
 import { GetCombinedStatsCommand } from '@remnawave/node-contract';
 
 import { MESSAGING_NAMES, MICROSERVICES_NAMES } from '@common/microservices';
+import { multiplyConsumption } from '@common/utils/nano';
 import { AxiosService } from '@common/axios';
 
 import { UpsertHistoryEntryCommand } from '@modules/nodes-usage-history/commands/upsert-history-entry';
@@ -37,7 +38,7 @@ export class RecordNodeUsageQueueProcessor extends WorkerHost {
 
     async process(job: Job<IRecordNodeUsagePayload>) {
         try {
-            const { nodeUuid, connectionOpts } = job.data;
+            const { nodeUuid, connectionOpts, nodeConsumptionMultiplier } = job.data;
 
             const combinedStats = await this.axios.getCombinedStats(
                 {
@@ -53,7 +54,7 @@ export class RecordNodeUsageQueueProcessor extends WorkerHost {
                 return;
             }
 
-            return this.handleOk(nodeUuid, combinedStats.response);
+            return this.handleOk(nodeUuid, nodeConsumptionMultiplier, combinedStats.response);
         } catch (error) {
             this.logger.error(
                 `Error handling "${NODES_JOB_NAMES.RECORD_NODE_USAGE}" job: ${error}`,
@@ -65,6 +66,7 @@ export class RecordNodeUsageQueueProcessor extends WorkerHost {
 
     private async handleOk(
         nodeUuid: string,
+        nodeConsumptionMultiplier: string,
         combinedStats: GetCombinedStatsCommand.Response['response'],
     ): Promise<void> {
         const nodeOutboundsMetrics = new Map<
@@ -109,7 +111,10 @@ export class RecordNodeUsageQueueProcessor extends WorkerHost {
         );
 
         await this.commandBus.execute(
-            new IncrementUsedTrafficCommand(nodeUuid, BigInt(totalBytes)),
+            new IncrementUsedTrafficCommand(
+                nodeUuid,
+                multiplyConsumption(nodeConsumptionMultiplier, totalBytes),
+            ),
         );
 
         combinedStats.outbounds.forEach((outbound) => {

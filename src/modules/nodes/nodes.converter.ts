@@ -33,6 +33,7 @@ const entityToModel = (entity: NodesEntity): Nodes => {
         viewPosition: entity.viewPosition,
         countryCode: entity.countryCode,
         consumptionMultiplier: entity.consumptionMultiplier,
+        nodeConsumptionMultiplier: entity.nodeConsumptionMultiplier,
         tags: entity.tags,
 
         activeConfigProfileUuid: entity.activeConfigProfileUuid,

@@ -74,7 +74,15 @@ export class NodesRepository implements ICrud<NodesEntity> {
     public async findConnectedNodesPartial(): Promise<IGetOnlineNodesPartialResponse[]> {
         const nodesList = await this.qb.kysely
             .selectFrom('nodes')
-            .select(['uuid', 'consumptionMultiplier', 'id', 'address', 'port', 'proxyUrl'])
+            .select([
+                'uuid',
+                'consumptionMultiplier',
+                'nodeConsumptionMultiplier',
+                'id',
+                'address',
+                'port',
+                'proxyUrl',
+            ])
             .where('isConnected', '=', true)
             .where('isDisabled', '=', false)
             .where('isConnecting', '=', false)
@@ -84,6 +92,7 @@ export class NodesRepository implements ICrud<NodesEntity> {
         return nodesList.map((value) => ({
             uuid: value.uuid,
             consumptionMultiplier: value.consumptionMultiplier,
+            nodeConsumptionMultiplier: value.nodeConsumptionMultiplier,
             id: value.id,
             connectionOpts: {
                 address: value.address,

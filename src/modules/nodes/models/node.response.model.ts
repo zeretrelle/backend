@@ -19,6 +19,7 @@ export class NodeResponseModel {
     public lastStatusMessage: null | string;
     public trafficResetDay: null | number;
     public consumptionMultiplier: number;
+    public nodeConsumptionMultiplier: number;
     public isTrafficTrackingActive: boolean;
     public trafficLimitBytes: null | number;
     public trafficUsedBytes: null | number;
@@ -61,7 +62,7 @@ export class NodeResponseModel {
         this.notifyPercent = data.notifyPercent;
         this.note = data.note;
         this.consumptionMultiplier = fromNanoToNumber(data.consumptionMultiplier);
-
+        this.nodeConsumptionMultiplier = fromNanoToNumber(data.nodeConsumptionMultiplier);
         this.tags = data.tags;
         this.createdAt = data.createdAt;
         this.updatedAt = data.updatedAt;

@@ -9,7 +9,7 @@ import { Logger } from '@nestjs/common';
 
 import { GetUsersStatsCommand } from '@remnawave/node-contract';
 
-import { fromNanoToNumber } from '@common/utils/nano';
+import { multiplyConsumption } from '@common/utils/nano';
 import { RawCacheService } from '@common/raw-cache';
 import { AxiosService } from '@common/axios';
 import {
@@ -139,7 +139,7 @@ export class RecordUserUsageQueueProcessor extends WorkerHost {
 
                 userUsageList[userUsageIndex++] = {
                     u: user.username,
-                    b: this.multiplyConsumption(consumptionMultiplier, totalBytes).toString(),
+                    b: multiplyConsumption(consumptionMultiplier, totalBytes).toString(),
                     n: nodeUuid,
                 };
             });
@@ -177,19 +177,5 @@ export class RecordUserUsageQueueProcessor extends WorkerHost {
                 );
             }
         }
-    }
-
-    private multiplyConsumption(consumptionMultiplier: string, totalBytes: number): bigint {
-        const multiplier = BigInt(consumptionMultiplier);
-        if (multiplier === 0n) {
-            return 0n;
-        }
-
-        if (multiplier === BigInt(1000000000)) {
-            // skip if 1:1 ratio
-            return BigInt(totalBytes);
-        }
-
-        return BigInt(Math.floor(fromNanoToNumber(multiplier) * totalBytes));
     }
 }

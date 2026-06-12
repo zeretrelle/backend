@@ -28,6 +28,7 @@ export const NodesSchema = z.object({
     viewPosition: z.number().int(),
     countryCode: z.string(),
     consumptionMultiplier: z.number(),
+    nodeConsumptionMultiplier: z.number(),
     tags: z.array(z.string()),
 
     createdAt: z

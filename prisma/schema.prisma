@@ -181,7 +181,8 @@ model Nodes {
   lastStatusMessage String?   @map("last_status_message")
   note              String?   @map("note") @db.VarChar(255)
 
-  consumptionMultiplier BigInt @default(1000000000) @map("consumption_multiplier")
+  consumptionMultiplier     BigInt @default(1000000000) @map("consumption_multiplier")
+  nodeConsumptionMultiplier BigInt @default(1000000000) @map("node_consumption_multiplier")
 
   isTrafficTrackingActive Boolean @default(false) @map("is_traffic_tracking_active")
   trafficResetDay         Int?    @default(1) @map("traffic_reset_day")

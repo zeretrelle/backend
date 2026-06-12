@@ -28,7 +28,7 @@ export class NodesEntity implements Nodes {
     public countryCode: string;
     public tags: string[];
     public consumptionMultiplier: bigint;
-
+    public nodeConsumptionMultiplier: bigint;
     public createdAt: Date;
     public updatedAt: Date;
 

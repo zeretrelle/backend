@@ -61,6 +61,7 @@ export class NodesService {
                 isDisabled: false,
                 trafficLimitBytes: wrapBigInt(nodeData.trafficLimitBytes),
                 consumptionMultiplier: mapDefined(nodeData.consumptionMultiplier, toNano),
+                nodeConsumptionMultiplier: mapDefined(nodeData.nodeConsumptionMultiplier, toNano),
                 activeConfigProfileUuid: configProfile.activeConfigProfileUuid,
             });
 
@@ -304,6 +305,7 @@ export class NodesService {
                 address: nodeData.address ? nodeData.address.trim() : undefined,
                 trafficLimitBytes: wrapBigInt(nodeData.trafficLimitBytes),
                 consumptionMultiplier: mapDefined(nodeData.consumptionMultiplier, toNano),
+                nodeConsumptionMultiplier: mapDefined(nodeData.nodeConsumptionMultiplier, toNano),
                 activeConfigProfileUuid: configProfile?.activeConfigProfileUuid,
             });
 
@@ -577,6 +579,7 @@ export class NodesService {
             const fieldsToUpdate: Partial<NodesEntity> = {
                 countryCode: fields.countryCode,
                 consumptionMultiplier: mapDefined(fields.consumptionMultiplier, toNano),
+                nodeConsumptionMultiplier: mapDefined(fields.nodeConsumptionMultiplier, toNano),
                 providerUuid: fields.providerUuid,
                 tags: fields.tags,
                 activePluginUuid: fields.activePluginUuid,
