@@ -1,5 +1,10 @@
 #!/usr/bin/env node
 
+import {
+    generateHybridIdentity,
+    generateX25519Identity,
+    identityToRecipient,
+} from 'age-encryption';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { PrismaClient } from '@prisma/client';
@@ -13,6 +18,8 @@ import { encodeCertPayload } from '@common/utils/certs/encode-node-payload';
 import { getRedisConnectionOptions } from '@common/utils';
 import { generateNodeCert } from '@common/utils/certs';
 import { CACHE_KEYS } from '@libs/contracts/constants';
+
+import { TResponseRuleEncryption } from '@modules/subscription-response-rules/types/response-rules.types';
 
 dayjs.extend(utc);
 dayjs.extend(relativeTime);
@@ -45,6 +52,7 @@ const enum CLI_ACTIONS {
     DELETE_USERS_USAGE_BY_DATE_RANGE = 'delete-users-usage-by-date-range',
     ENABLE_PASSWORD_AUTH = 'enable-password-auth',
     EXIT = 'exit',
+    GENERATE_ENCRYPTION_KEYS = 'generate-encryption-keys',
     GET_SECRET_KEY_FOR_NODE = 'get-secret-key-for-node',
     RESET_CERTS = 'reset-certs',
     RESET_SUPERADMIN = 'reset-superadmin',
@@ -560,6 +568,68 @@ async function deleteUsersUsageByDateRange() {
     process.exit(0);
 }
 
+async function generateEncryptionKeys() {
+    const method = (await consola.prompt('Select encryption method', {
+        type: 'select',
+        required: true,
+        options: [
+            {
+                value: 'age1',
+                label: 'age1 (X25519)',
+                hint: 'Native X25519 — classical security',
+            },
+            {
+                value: 'age1pq1',
+                label: 'age1pq1 (hybrid post-quantum)',
+                hint: 'X25519 + ML-KEM-768 — post-quantum resistant',
+            },
+        ],
+        initial: 'age1',
+    })) as TResponseRuleEncryption['method'];
+
+    consola.start(`🔑 Generating ${method} key pair...`);
+
+    try {
+        let identity: string;
+
+        switch (method) {
+            case 'age1':
+                identity = await generateX25519Identity();
+                break;
+            case 'age1pq1':
+                identity = await generateHybridIdentity();
+                break;
+            default: {
+                const exhaustiveCheck: never = method;
+                throw new Error(`Unsupported encryption method: ${exhaustiveCheck}`);
+            }
+        }
+
+        const recipient = await identityToRecipient(identity);
+
+        consola.success('✅ Key pair generated successfully.');
+
+        consola.box(
+            `age key pair (${method})\n\n` +
+                `PUBLIC KEY (recipient)\n` +
+                `Put this into the response rule "encryption.key":\n` +
+                `${recipient}\n\n` +
+                `PRIVATE KEY (identity)\n` +
+                `Keep it secret — the client uses it to decrypt the response:\n` +
+                `${identity}`,
+        );
+
+        consola.warn(
+            'Store the PRIVATE KEY securely. Anyone who has it can decrypt the subscription responses.',
+        );
+
+        process.exit(0);
+    } catch (error) {
+        consola.error('❌ Failed to generate key pair:', error);
+        process.exit(1);
+    }
+}
+
 async function main() {
     consola.box('Remnawave Rescue CLI v0.4');
 
@@ -594,14 +664,9 @@ async function main() {
                 hint: 'Enable password authentication',
             },
             {
-                value: CLI_ACTIONS.RESET_CERTS,
-                label: 'Reset certs',
-                hint: 'Fully reset certs',
-            },
-            {
-                value: CLI_ACTIONS.GET_SECRET_KEY_FOR_NODE,
-                label: 'Get SECRET_KEY for a Remnawave Node',
-                hint: 'Get SECRET_KEY in cases, where you can not get from Panel',
+                value: CLI_ACTIONS.GENERATE_ENCRYPTION_KEYS,
+                label: 'Generate keypairs',
+                hint: 'Generate keypairs for response rules encryption',
             },
             {
                 value: CLI_ACTIONS.TRUNCATE_HWID_USER_DEVICES,
@@ -624,6 +689,16 @@ async function main() {
                 hint: 'Remove traffic statistics for a period (day-month-year); choose single or batched',
             },
             {
+                value: CLI_ACTIONS.RESET_CERTS,
+                label: 'Reset certs',
+                hint: 'Fully reset certs',
+            },
+            {
+                value: CLI_ACTIONS.GET_SECRET_KEY_FOR_NODE,
+                label: 'Get SECRET_KEY for a Remnawave Node',
+                hint: 'Get SECRET_KEY in cases, where you can not get from Panel',
+            },
+            {
                 value: CLI_ACTIONS.EXIT,
                 label: 'Exit',
             },
@@ -640,6 +715,9 @@ async function main() {
             break;
         case CLI_ACTIONS.GET_SECRET_KEY_FOR_NODE:
             await getSecretKeyForNode();
+            break;
+        case CLI_ACTIONS.GENERATE_ENCRYPTION_KEYS:
+            await generateEncryptionKeys();
             break;
         case CLI_ACTIONS.ENABLE_PASSWORD_AUTH:
             await enablePasswordAuth();

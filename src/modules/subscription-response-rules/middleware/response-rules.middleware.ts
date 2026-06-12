@@ -117,6 +117,10 @@ export class ResponseRulesMiddleware implements NestMiddleware {
                 if (mods.disableHwidCheck) {
                     ssrContext.disableHwidCheck = true;
                 }
+
+                if (mods.encryption) {
+                    ssrContext.encryption = mods.encryption;
+                }
             }
 
             switch (ssrContext.matchedResponseType) {

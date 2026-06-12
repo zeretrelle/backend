@@ -1,5 +1,10 @@
 import z from 'zod';
 
+export const ResponseRuleEncryptionSchema = z.object({
+    method: z.enum(['age1', 'age1pq1']),
+    key: z.string(),
+});
+
 export const ResponseRuleModificationsSchema = z
     .object({
         headers: z
@@ -117,6 +122,12 @@ export const ResponseRuleModificationsSchema = z
                         'If you set this flag to **true**, the HWID check will be disabled. **This modification have higher priority than settings from Subscription Settings.**',
                 }),
             ),
+        encryption: ResponseRuleEncryptionSchema.optional().describe(
+            JSON.stringify({
+                markdownDescription:
+                    'Encrypt response body with given parameters. Generate keypairs with Rescue CLI: `docker exec -it remnawave cli`, select "Generate keypairs".',
+            }),
+        ),
     })
     .optional()
     .describe(
