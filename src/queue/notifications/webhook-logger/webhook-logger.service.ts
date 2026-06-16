@@ -35,10 +35,6 @@ export class WebhookLoggerQueueService
         await this.checkConnection();
     }
 
-    public async sendWebhook(payload: IBaseWebhookLogger) {
-        return this.addJob(WebhookLoggerJobNames.sendWebhook, payload);
-    }
-
     public async sendWebhooks(payload: IBaseWebhookLogger, webhookUrls: string[]) {
         if (webhookUrls.length === 0) {
             return;
@@ -50,6 +46,14 @@ export class WebhookLoggerQueueService
                 data: {
                     ...payload,
                     url: url,
+                },
+                opts: {
+                    removeOnComplete: {
+                        count: 800,
+                    },
+                    removeOnFail: {
+                        count: 2000,
+                    },
                 },
             })),
         );

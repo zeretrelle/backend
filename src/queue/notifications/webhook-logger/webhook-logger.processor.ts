@@ -84,7 +84,7 @@ export class WebhookLoggerQueueProcessor extends WorkerHost {
                 `Error handling "${WebhookLoggerJobNames.sendWebhook}" job: ${error}`,
             );
 
-            return { isOk: false };
+            throw new Error(error instanceof Error ? error.message : 'Unknown error');
         }
     }
 }
