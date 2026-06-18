@@ -64,20 +64,18 @@ export class TemplateEngine {
         return { body: template, transform: null };
     }
 
-    static formatWithUser(
-        template: string,
+    static createUserValueMap(
         user: UserEntity,
         subscriptionSettings: SubscriptionSettingsEntity,
         subPublicDomain: string,
         forHeader: boolean = false,
-    ): string {
-        // trafficLimitBytes === 0n means Unlimited, so there is no traffic to subtract from.
+    ): LazyTemplateValues {
         const trafficLeft = (): bigint =>
             user.trafficLimitBytes === 0n
                 ? 0n
                 : user.trafficLimitBytes - user.userTraffic.usedTrafficBytes;
 
-        return this.replace(template, {
+        return {
             DAYS_LEFT: () => Math.max(0, dayjs(user.expireAt).diff(dayjs(), 'day')),
             TRAFFIC_USED: () => prettyBytesUtil(user.userTraffic.usedTrafficBytes, true, 3),
             TRAFFIC_LEFT: () => prettyBytesUtil(trafficLeft(), true, 3),
@@ -109,6 +107,19 @@ export class TemplateEngine {
                     ? user.hwidDeviceLimit
                     : (subscriptionSettings.hwidSettings.fallbackDeviceLimit ?? 0)
                 ).toString(),
-        });
+        };
+    }
+
+    static formatWithUser(
+        template: string,
+        user: UserEntity,
+        subscriptionSettings: SubscriptionSettingsEntity,
+        subPublicDomain: string,
+        forHeader: boolean = false,
+    ): string {
+        return this.replace(
+            template,
+            this.createUserValueMap(user, subscriptionSettings, subPublicDomain, forHeader),
+        );
     }
 }

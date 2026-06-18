@@ -102,16 +102,17 @@ export class ResolveProxyConfigService {
         const knownRemarks = new Map<string, number>();
         const resolvedProxyConfigs: ResolvedProxyConfig[] = [];
 
+        const userValueMap = TemplateEngine.createUserValueMap(
+            user,
+            subscriptionSettings,
+            this.subPublicDomain,
+        );
+
         for (const inputHost of hosts) {
             this.applyHostOverrides(inputHost, hostsOverrides);
 
             const finalRemark = this.deduplicateRemark(
-                TemplateEngine.formatWithUser(
-                    inputHost.remark,
-                    user,
-                    subscriptionSettings,
-                    this.subPublicDomain,
-                ),
+                TemplateEngine.replace(inputHost.remark, userValueMap),
                 knownRemarks,
             );
 
