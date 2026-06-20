@@ -12,6 +12,7 @@ export namespace GetUserByEmailCommand {
         USERS_ROUTES.GET_BY.EMAIL(':email'),
         'get',
         'Get users by email',
+        { scope: 'by-email', kind: 'read' },
     );
 
     export const RequestSchema = z.object({

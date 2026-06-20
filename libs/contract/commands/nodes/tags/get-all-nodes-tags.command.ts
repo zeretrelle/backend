@@ -11,6 +11,7 @@ export namespace GetAllNodesTagsCommand {
         NODES_ROUTES.TAGS.GET,
         'get',
         'Get all existing nodes tags',
+        { scope: 'list-tags', kind: 'read' },
     );
 
     export const ResponseSchema = z.object({

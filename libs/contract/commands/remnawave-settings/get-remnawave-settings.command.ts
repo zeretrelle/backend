@@ -12,6 +12,7 @@ export namespace GetRemnawaveSettingsCommand {
         REMNAAWAVE_SETTINGS_ROUTES.GET,
         'get',
         'Get Remnawave settings',
+        { scope: 'get', kind: 'read' },
     );
 
     export const ResponseSchema = z.object({

@@ -4,6 +4,7 @@ export const ApiTokensSchema = z.object({
     uuid: z.string().uuid(),
     token: z.string(),
     tokenName: z.string(),
+    scopes: z.array(z.string()),
 
     createdAt: z
         .string()

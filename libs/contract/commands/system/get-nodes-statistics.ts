@@ -11,6 +11,7 @@ export namespace GetNodesStatisticsCommand {
         SYSTEM_ROUTES.STATS.NODES_STATS,
         'get',
         'Get Nodes Statistics',
+        { scope: 'nodes-statistics', kind: 'read' },
     );
 
     export const RequestQuerySchema = z.object({

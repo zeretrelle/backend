@@ -12,6 +12,7 @@ export namespace GetSubscriptionTemplatesCommand {
         SUBSCRIPTION_TEMPLATE_ROUTES.GET_ALL,
         'get',
         'Get all subscription templates (wihout content)',
+        { scope: 'list', kind: 'read' },
     );
 
     export const ResponseSchema = z.object({

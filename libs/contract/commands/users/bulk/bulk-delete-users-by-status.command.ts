@@ -12,6 +12,7 @@ export namespace BulkDeleteUsersByStatusCommand {
         USERS_ROUTES.BULK.DELETE_BY_STATUS,
         'post',
         'Bulk delete users by status',
+        { scope: 'bulk-delete-by-status', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

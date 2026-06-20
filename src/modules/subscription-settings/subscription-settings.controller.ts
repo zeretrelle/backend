@@ -7,8 +7,10 @@ import { ApiBearerAuth, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { HttpExceptionFilter } from '@common/exception/http-exception.filter';
 import { JwtDefaultGuard } from '@common/guards/jwt-guards/def-jwt-guard';
 import { errorHandler } from '@common/helpers/error-handler.helper';
+import { ApiScopeResource } from '@common/decorators/scopes';
 import { Endpoint } from '@common/decorators/base-endpoint';
 import { Roles } from '@common/decorators/roles/roles';
+import { ScopesGuard } from '@common/guards/scopes';
 import { RolesGuard } from '@common/guards/roles';
 import {
     GetSubscriptionSettingsCommand,
@@ -24,9 +26,10 @@ import { SubscriptionSettingsResponseModel } from './models/get-subscription-set
 import { SubscriptionSettingsService } from './subscription-settings.service';
 
 @ApiBearerAuth('Authorization')
+@ApiScopeResource(CONTROLLERS_INFO.SUBSCRIPTION_SETTINGS.resource)
 @ApiTags(CONTROLLERS_INFO.SUBSCRIPTION_SETTINGS.tag)
 @Roles(ROLE.ADMIN, ROLE.API)
-@UseGuards(JwtDefaultGuard, RolesGuard)
+@UseGuards(JwtDefaultGuard, RolesGuard, ScopesGuard)
 @UseFilters(HttpExceptionFilter)
 @Controller(SUBSCRIPTION_SETTINGS_CONTROLLER)
 export class SubscriptionSettingsController {

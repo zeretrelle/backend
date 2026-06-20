@@ -23,9 +23,11 @@ import { HttpExceptionFilter } from '@common/exception/http-exception.filter';
 import { JwtDefaultGuard } from '@common/guards/jwt-guards/def-jwt-guard';
 import { extractHwidHeaders } from '@common/utils/extract-hwid-headers';
 import { errorHandler } from '@common/helpers/error-handler.helper';
+import { ApiScopeResource } from '@common/decorators/scopes';
 import { Endpoint } from '@common/decorators/base-endpoint';
 import { Roles } from '@common/decorators/roles/roles';
 import { IpAddress } from '@common/decorators/get-ip';
+import { ScopesGuard } from '@common/guards/scopes';
 import { RolesGuard } from '@common/guards/roles';
 import {
     GetAllSubscriptionsCommand,
@@ -63,9 +65,10 @@ import { AllSubscriptionsResponseModel, SubscriptionRawResponse } from '../model
 import { SubscriptionService } from '../subscription.service';
 
 @ApiBearerAuth('Authorization')
+@ApiScopeResource(CONTROLLERS_INFO.SUBSCRIPTIONS.resource)
 @ApiTags(CONTROLLERS_INFO.SUBSCRIPTIONS.tag)
 @Roles(ROLE.ADMIN, ROLE.API)
-@UseGuards(JwtDefaultGuard, RolesGuard)
+@UseGuards(JwtDefaultGuard, RolesGuard, ScopesGuard)
 @UseFilters(HttpExceptionFilter)
 @Controller(SUBSCRIPTIONS_CONTROLLER)
 export class SubscriptionsController {

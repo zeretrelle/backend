@@ -11,6 +11,7 @@ export namespace BulkNodesUpdateCommand {
         NODES_ROUTES.BULK_ACTIONS.UPDATE,
         'post',
         'Update many nodes',
+        { scope: 'bulk-update', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

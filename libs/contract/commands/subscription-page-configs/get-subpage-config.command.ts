@@ -12,6 +12,7 @@ export namespace GetSubscriptionPageConfigCommand {
         SUBSCRIPTION_PAGE_CONFIGS_ROUTES.GET(':uuid'),
         'get',
         'Get subscription page config by uuid',
+        { scope: 'get', kind: 'read' },
     );
 
     export const RequestSchema = z.object({

@@ -11,6 +11,7 @@ export namespace GetStatusCommand {
         AUTH_ROUTES.GET_STATUS,
         'get',
         'Get the status of the authentication',
+        { scope: 'get-status', kind: 'read' },
     );
 
     export const ResponseSchema = z.object({

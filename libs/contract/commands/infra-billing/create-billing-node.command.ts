@@ -12,6 +12,7 @@ export namespace CreateInfraBillingNodeCommand {
         INFRA_BILLING_ROUTES.CREATE_BILLING_NODE,
         'post',
         'Create infra billing node',
+        { scope: 'create-billing-node', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

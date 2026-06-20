@@ -81,27 +81,7 @@ async function bootstrap(): Promise<void> {
 
     const config = app.get(TypedConfigService);
 
-    app.use(
-        helmet({
-            contentSecurityPolicy: {
-                directives: {
-                    defaultSrc: ["'self'", '*'],
-                    scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", '*'],
-                    imgSrc: ["'self'", 'data:', '*'],
-                    connectSrc: ["'self'", '*'],
-                    workerSrc: ["'self'", 'blob:', '*'],
-                    frameSrc: ["'self'", 'oauth.telegram.org', '*'],
-                    frameAncestors: ["'self'", '*'],
-                },
-            },
-
-            crossOriginOpenerPolicy: { policy: 'same-origin-allow-popups' },
-            crossOriginResourcePolicy: { policy: 'same-site' },
-            referrerPolicy: {
-                policy: 'strict-origin-when-cross-origin',
-            },
-        }),
-    );
+    app.use(helmet());
 
     app.use(compression());
 

@@ -12,6 +12,7 @@ export namespace BulkEnableHostsCommand {
         HOSTS_ROUTES.BULK.ENABLE_HOSTS,
         'post',
         'Enable hosts by UUIDs',
+        { scope: 'bulk-enable', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

@@ -11,6 +11,7 @@ export namespace GetPasskeyAuthenticationOptionsCommand {
         AUTH_ROUTES.PASSKEY.GET_AUTHENTICATION_OPTIONS,
         'get',
         'Get the authentication options for passkey',
+        { scope: 'get-authentication-options', kind: 'read' },
     );
 
     export const ResponseSchema = z.object({

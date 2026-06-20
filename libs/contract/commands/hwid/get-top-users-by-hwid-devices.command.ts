@@ -11,6 +11,7 @@ export namespace GetTopUsersByHwidDevicesCommand {
         HWID_ROUTES.TOP_USERS_BY_DEVICES,
         'get',
         'Get top users by HWID devices',
+        { scope: 'top-users', kind: 'read' },
     );
 
     export const RequestQuerySchema = z.object({

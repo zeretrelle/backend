@@ -12,6 +12,7 @@ export namespace ResetUserTrafficCommand {
         USERS_ROUTES.ACTIONS.RESET_TRAFFIC(':uuid'),
         'post',
         'Reset user traffic',
+        { scope: 'reset-traffic', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

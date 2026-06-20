@@ -12,6 +12,7 @@ export namespace GetInfraBillingHistoryRecordsCommand {
         INFRA_BILLING_ROUTES.GET_BILLING_HISTORY,
         'get',
         'Get infra billing history',
+        { scope: 'list-bill-records', kind: 'read' },
     );
 
     export const RequestQuerySchema = z.object({

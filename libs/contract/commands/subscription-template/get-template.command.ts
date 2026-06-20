@@ -12,6 +12,7 @@ export namespace GetSubscriptionTemplateCommand {
         SUBSCRIPTION_TEMPLATE_ROUTES.GET(':uuid'),
         'get',
         'Get subscription template by uuid',
+        { scope: 'get', kind: 'read' },
     );
 
     export const RequestSchema = z.object({

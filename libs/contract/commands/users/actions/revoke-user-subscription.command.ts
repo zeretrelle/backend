@@ -12,6 +12,7 @@ export namespace RevokeUserSubscriptionCommand {
         USERS_ROUTES.ACTIONS.REVOKE_SUBSCRIPTION(':uuid'),
         'post',
         'Revoke user subscription',
+        { scope: 'revoke-subscription', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

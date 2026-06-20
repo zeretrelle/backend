@@ -11,6 +11,7 @@ export namespace BulkRevokeUsersSubscriptionCommand {
         USERS_ROUTES.BULK.REVOKE_SUBSCRIPTION,
         'post',
         'Revoke users subscription by User UUIDs',
+        { scope: 'bulk-revoke-subscription', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

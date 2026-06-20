@@ -12,6 +12,7 @@ export namespace GetUserByTagCommand {
         USERS_ROUTES.GET_BY.TAG(':tag'),
         'get',
         'Get users by tag',
+        { scope: 'by-tag', kind: 'read' },
     );
 
     export const RequestSchema = z.object({

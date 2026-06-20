@@ -11,6 +11,7 @@ export namespace GetMetadataCommand {
         SYSTEM_ROUTES.METADATA,
         'get',
         'Get Remnawave Information',
+        { scope: 'metadata', kind: 'read' },
     );
 
     export const ResponseSchema = z.object({

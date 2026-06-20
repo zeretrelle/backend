@@ -11,6 +11,7 @@ export namespace GetStatsNodesUsersUsageCommand {
         BANDWIDTH_STATS_ROUTES.NODES.GET_USERS_BY_NODES,
         'post',
         'Get Nodes Users Usage by Nodes UUIDs',
+        { scope: 'nodes-users-usage', kind: 'read' },
     );
 
     export const RequestQuerySchema = z.object({

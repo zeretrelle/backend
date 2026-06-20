@@ -11,8 +11,10 @@ import { Body, Controller, HttpStatus, Param, UseFilters, UseGuards } from '@nes
 import { HttpExceptionFilter } from '@common/exception/http-exception.filter';
 import { JwtDefaultGuard } from '@common/guards/jwt-guards/def-jwt-guard';
 import { errorHandler } from '@common/helpers/error-handler.helper';
+import { ApiScopeResource } from '@common/decorators/scopes';
 import { Endpoint } from '@common/decorators/base-endpoint';
 import { Roles } from '@common/decorators/roles/roles';
+import { ScopesGuard } from '@common/guards/scopes';
 import { RolesGuard } from '@common/guards/roles';
 import {
     CreateConfigProfileCommand,
@@ -45,9 +47,10 @@ import {
 import { ConfigProfileService } from './config-profile.service';
 
 @ApiBearerAuth('Authorization')
+@ApiScopeResource(CONTROLLERS_INFO.CONFIG_PROFILES.resource)
 @ApiTags(CONTROLLERS_INFO.CONFIG_PROFILES.tag)
 @Roles(ROLE.ADMIN, ROLE.API)
-@UseGuards(JwtDefaultGuard, RolesGuard)
+@UseGuards(JwtDefaultGuard, RolesGuard, ScopesGuard)
 @UseFilters(HttpExceptionFilter)
 @Controller(CONFIG_PROFILES_CONTROLLER)
 export class ConfigProfileController {

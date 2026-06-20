@@ -11,6 +11,7 @@ export namespace GetAllTagsCommand {
         USERS_ROUTES.TAGS.GET,
         'get',
         'Get all existing user tags',
+        { scope: 'list-tags', kind: 'read' },
     );
 
     export const ResponseSchema = z.object({

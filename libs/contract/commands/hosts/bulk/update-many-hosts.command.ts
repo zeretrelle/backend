@@ -13,6 +13,7 @@ export namespace UpdateManyHostsCommand {
         HOSTS_ROUTES.BULK.UPDATE,
         'patch',
         'Update many hosts',
+        { scope: 'bulk-update', kind: 'write' },
     );
 
     export const RequestSchema = UpdateHostCommand.RequestSchema.omit({ uuid: true })

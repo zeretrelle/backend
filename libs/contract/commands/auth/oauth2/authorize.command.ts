@@ -11,6 +11,7 @@ export namespace OAuth2AuthorizeCommand {
         AUTH_ROUTES.OAUTH2.AUTHORIZE,
         'post',
         'Initiate OAuth2 authorization',
+        { scope: 'authorize', kind: 'read' },
     );
 
     export const RequestSchema = z.object({

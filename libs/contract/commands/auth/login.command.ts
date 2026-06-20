@@ -11,6 +11,7 @@ export namespace LoginCommand {
         AUTH_ROUTES.LOGIN,
         'post',
         'Login as superadmin',
+        { scope: 'login', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

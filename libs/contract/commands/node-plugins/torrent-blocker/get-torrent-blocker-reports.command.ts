@@ -12,6 +12,7 @@ export namespace GetTorrentBlockerReportsCommand {
         NODE_PLUGINS_ROUTES.TORRENT_BLOCKER.GET_REPORTS,
         'get',
         'Get Torrent Blocker Reports',
+        { scope: 'torrent-blocker-reports', kind: 'read' },
     );
 
     export const RequestQuerySchema = TanstackQueryRequestQuerySchema;

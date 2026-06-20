@@ -8,7 +8,10 @@ export namespace GetAllNodesCommand {
     export const url = REST_API.NODES.GET;
     export const TSQ_url = url;
 
-    export const endpointDetails = getEndpointDetails(NODES_ROUTES.GET, 'get', 'Get all nodes');
+    export const endpointDetails = getEndpointDetails(NODES_ROUTES.GET, 'get', 'Get all nodes', {
+        scope: 'list',
+        kind: 'read',
+    });
 
     export const ResponseSchema = z.object({
         response: z.array(NodesSchema),

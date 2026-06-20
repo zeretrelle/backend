@@ -11,6 +11,7 @@ export namespace ResolveUserCommand {
         USERS_ROUTES.RESOLVE,
         'post',
         'Resolve a user',
+        { scope: 'resolve', kind: 'read' },
     );
 
     export const RequestSchema = z

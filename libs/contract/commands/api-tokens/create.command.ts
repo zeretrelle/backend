@@ -1,5 +1,6 @@
 import { z } from 'zod';
 
+import { ApiTokensSchema } from '../../models/api-tokens.schema';
 import { REST_API, API_TOKENS_ROUTES } from '../../api';
 import { getEndpointDetails } from '../../constants';
 
@@ -11,20 +12,19 @@ export namespace CreateApiTokenCommand {
         API_TOKENS_ROUTES.CREATE,
         'post',
         'Create a new API token',
+        { scope: 'create', kind: 'write' },
         'This endpoint is forbidden to use via "API-key". It can only be used with an admin JWT-token.',
     );
 
     export const RequestSchema = z.object({
         tokenName: z.string(),
+        scopes: z.array(z.string()).optional().default(['*']),
     });
 
     export type Request = z.infer<typeof RequestSchema>;
 
     export const ResponseSchema = z.object({
-        response: z.object({
-            token: z.string(),
-            uuid: z.string(),
-        }),
+        response: ApiTokensSchema,
     });
 
     export type Response = z.infer<typeof ResponseSchema>;

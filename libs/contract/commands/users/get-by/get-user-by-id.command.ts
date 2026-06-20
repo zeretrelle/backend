@@ -12,6 +12,7 @@ export namespace GetUserByIdCommand {
         USERS_ROUTES.GET_BY.ID(':id'),
         'get',
         'Get user by ID',
+        { scope: 'by-id', kind: 'read' },
     );
 
     export const RequestSchema = z.object({

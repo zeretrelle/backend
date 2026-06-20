@@ -12,6 +12,7 @@ export namespace ReorderSubscriptionTemplateCommand {
         SUBSCRIPTION_TEMPLATE_ROUTES.ACTIONS.REORDER,
         'post',
         'Reorder subscription templates',
+        { scope: 'reorder', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

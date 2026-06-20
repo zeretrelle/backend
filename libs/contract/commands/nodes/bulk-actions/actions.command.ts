@@ -11,6 +11,7 @@ export namespace BulkNodesActionsCommand {
         NODES_ROUTES.BULK_ACTIONS.ACTIONS,
         'post',
         'Perform actions for many nodes',
+        { scope: 'bulk-actions', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

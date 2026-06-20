@@ -12,6 +12,7 @@ export namespace GetSubscriptionByShortUuidProtectedCommand {
         SUBSCRIPTIONS_ROUTES.GET_BY.SHORT_UUID(':shortUuid'),
         'get',
         'Get subscription by short uuid (protected route)',
+        { scope: 'by-short-uuid-protected', kind: 'read' },
     );
 
     export const RequestSchema = z.object({

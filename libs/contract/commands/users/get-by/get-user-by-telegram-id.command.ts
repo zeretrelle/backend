@@ -12,6 +12,7 @@ export namespace GetUserByTelegramIdCommand {
         USERS_ROUTES.GET_BY.TELEGRAM_ID(':telegramId'),
         'get',
         'Get users by telegram ID',
+        { scope: 'by-telegram-id', kind: 'read' },
     );
 
     export const RequestSchema = z.object({

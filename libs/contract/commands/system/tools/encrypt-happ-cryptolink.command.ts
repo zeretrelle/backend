@@ -11,6 +11,7 @@ export namespace EncryptHappCryptoLinkCommand {
         SYSTEM_ROUTES.TOOLS.ENCRYPT_HAPP_CRYPTO_LINK,
         'post',
         'Encrypt Happ Crypto Link',
+        { scope: 'encrypt-happ-crypto-link', kind: 'read' },
     );
     export const RequestSchema = z.object({
         linkToEncrypt: z.string().url(),

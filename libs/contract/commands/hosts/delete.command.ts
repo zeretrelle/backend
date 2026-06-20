@@ -11,6 +11,7 @@ export namespace DeleteHostCommand {
         HOSTS_ROUTES.DELETE(':uuid'),
         'delete',
         'Delete a host by UUID',
+        { scope: 'delete', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

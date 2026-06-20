@@ -11,6 +11,7 @@ export namespace CreateNodeCommand {
         NODES_ROUTES.CREATE,
         'post',
         'Create a new node',
+        { scope: 'create', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

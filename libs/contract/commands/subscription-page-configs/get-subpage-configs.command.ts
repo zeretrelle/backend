@@ -12,6 +12,7 @@ export namespace GetSubscriptionPageConfigsCommand {
         SUBSCRIPTION_PAGE_CONFIGS_ROUTES.GET_ALL,
         'get',
         'Get all subscription page configs',
+        { scope: 'list', kind: 'read' },
     );
 
     export const ResponseSchema = z.object({

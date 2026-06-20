@@ -11,6 +11,7 @@ export namespace BulkAllExtendExpirationDateCommand {
         USERS_ROUTES.BULK.ALL.EXTEND_EXPIRATION_DATE,
         'post',
         'Extend expiration date for all users by days',
+        { scope: 'bulk-all-extend-expiration-date', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

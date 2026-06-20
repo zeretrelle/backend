@@ -11,6 +11,7 @@ export namespace GetAllHostTagsCommand {
         HOSTS_ROUTES.TAGS.GET,
         'get',
         'Get all existing host tags',
+        { scope: 'list-tags', kind: 'read' },
     );
 
     export const ResponseSchema = z.object({

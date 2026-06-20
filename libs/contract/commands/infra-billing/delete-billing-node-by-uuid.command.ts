@@ -12,6 +12,7 @@ export namespace DeleteInfraBillingNodeByUuidCommand {
         INFRA_BILLING_ROUTES.DELETE_BILLING_NODE(':uuid'),
         'delete',
         'Delete infra billing node',
+        { scope: 'delete-billing-node', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

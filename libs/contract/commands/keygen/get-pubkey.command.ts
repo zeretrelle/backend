@@ -10,6 +10,7 @@ export namespace GetPubKeyCommand {
         KEYGEN_ROUTES.GET,
         'get',
         'Get SECRET_KEY for Remnawave Node',
+        { scope: 'get', kind: 'read' },
     );
 
     export const ResponseSchema = z.object({

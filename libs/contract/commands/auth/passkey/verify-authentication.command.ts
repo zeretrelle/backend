@@ -11,6 +11,7 @@ export namespace VerifyPasskeyAuthenticationCommand {
         AUTH_ROUTES.PASSKEY.VERIFY_AUTHENTICATION,
         'post',
         'Verify the authentication for passkey',
+        { scope: 'verify-authentication', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

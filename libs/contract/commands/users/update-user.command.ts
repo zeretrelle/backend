@@ -12,6 +12,7 @@ export namespace UpdateUserCommand {
         USERS_ROUTES.UPDATE,
         'patch',
         'Update a user by UUID or username',
+        { scope: 'update', kind: 'write' },
     );
 
     export const RequestSchema = z

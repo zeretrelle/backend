@@ -12,6 +12,7 @@ export namespace BulkDisableHostsCommand {
         HOSTS_ROUTES.BULK.DISABLE_HOSTS,
         'post',
         'Disable hosts by UUIDs',
+        { scope: 'bulk-disable', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

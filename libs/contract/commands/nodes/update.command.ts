@@ -8,7 +8,10 @@ export namespace UpdateNodeCommand {
     export const url = REST_API.NODES.UPDATE;
     export const TSQ_url = url;
 
-    export const endpointDetails = getEndpointDetails(NODES_ROUTES.UPDATE, 'patch', 'Update node');
+    export const endpointDetails = getEndpointDetails(NODES_ROUTES.UPDATE, 'patch', 'Update node', {
+        scope: 'update',
+        kind: 'write',
+    });
 
     export const RequestSchema = NodesSchema.pick({
         uuid: true,

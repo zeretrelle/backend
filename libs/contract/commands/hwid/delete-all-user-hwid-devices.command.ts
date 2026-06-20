@@ -12,6 +12,7 @@ export namespace DeleteAllUserHwidDevicesCommand {
         HWID_ROUTES.DELETE_ALL_USER_HWID_DEVICES,
         'post',
         'Delete all user HWID devices',
+        { scope: 'delete-all', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

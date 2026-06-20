@@ -18,6 +18,7 @@ export namespace CreateHostCommand {
         HOSTS_ROUTES.CREATE,
         'post',
         'Create a new host',
+        { scope: 'create', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

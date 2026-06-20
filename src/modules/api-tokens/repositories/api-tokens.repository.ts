@@ -44,7 +44,9 @@ export class ApiTokensRepository implements ICrud<ApiTokenEntity> {
         return this.apiTokenConverter.fromPrismaModelToEntity(result);
     }
 
-    public async findByCriteria(dto: Partial<ApiTokenEntity>): Promise<ApiTokenEntity[]> {
+    public async findByCriteria(
+        dto: Partial<Omit<ApiTokenEntity, 'scopes'>>,
+    ): Promise<ApiTokenEntity[]> {
         const bannerList = await this.prisma.tx.apiTokens.findMany({
             where: dto,
             orderBy: {
@@ -54,7 +56,9 @@ export class ApiTokensRepository implements ICrud<ApiTokenEntity> {
         return this.apiTokenConverter.fromPrismaModelsToEntities(bannerList);
     }
 
-    public async findFirstByCriteria(dto: Partial<ApiTokenEntity>): Promise<ApiTokenEntity | null> {
+    public async findFirstByCriteria(
+        dto: Partial<Omit<ApiTokenEntity, 'scopes'>>,
+    ): Promise<ApiTokenEntity | null> {
         const result = await this.prisma.tx.apiTokens.findFirst({
             where: dto,
         });

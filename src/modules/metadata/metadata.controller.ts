@@ -10,8 +10,10 @@ import { Body, Controller, HttpStatus, Param, UseFilters, UseGuards } from '@nes
 import { HttpExceptionFilter } from '@common/exception/http-exception.filter';
 import { JwtDefaultGuard } from '@common/guards/jwt-guards/def-jwt-guard';
 import { errorHandler } from '@common/helpers/error-handler.helper';
+import { ApiScopeResource } from '@common/decorators/scopes';
 import { Endpoint } from '@common/decorators/base-endpoint';
 import { Roles } from '@common/decorators/roles/roles';
+import { ScopesGuard } from '@common/guards/scopes';
 import { RolesGuard } from '@common/guards/roles';
 import {
     GetNodeMetadataCommand,
@@ -35,9 +37,10 @@ import {
 import { MetadataService } from './metadata.service';
 
 @ApiBearerAuth('Authorization')
+@ApiScopeResource(CONTROLLERS_INFO.METADATA.resource)
 @ApiTags(CONTROLLERS_INFO.METADATA.tag)
 @Roles(ROLE.ADMIN, ROLE.API)
-@UseGuards(JwtDefaultGuard, RolesGuard)
+@UseGuards(JwtDefaultGuard, RolesGuard, ScopesGuard)
 @UseFilters(HttpExceptionFilter)
 @Controller(METADATA_CONTROLLER)
 export class MetadataController {

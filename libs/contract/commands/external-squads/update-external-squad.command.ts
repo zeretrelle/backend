@@ -19,6 +19,7 @@ export namespace UpdateExternalSquadCommand {
         EXTERNAL_SQUADS_ROUTES.UPDATE,
         'patch',
         'Update external squad',
+        { scope: 'update', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

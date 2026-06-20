@@ -12,6 +12,7 @@ export namespace ReorderSubscriptionPageConfigsCommand {
         SUBSCRIPTION_PAGE_CONFIGS_ROUTES.ACTIONS.REORDER,
         'post',
         'Reorder subscription page configs',
+        { scope: 'reorder', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

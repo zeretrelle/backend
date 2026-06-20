@@ -12,6 +12,7 @@ export namespace CreateUserHwidDeviceCommand {
         HWID_ROUTES.CREATE_USER_HWID_DEVICE,
         'post',
         'Create a user HWID device',
+        { scope: 'create', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

@@ -11,6 +11,7 @@ export namespace GetNodesMetricsCommand {
         SYSTEM_ROUTES.STATS.NODES_METRICS,
         'get',
         'Get Nodes Metrics',
+        { scope: 'nodes-metrics', kind: 'read' },
     );
 
     export const ResponseSchema = z.object({

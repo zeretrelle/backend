@@ -12,6 +12,7 @@ export namespace TestSrrMatcherCommand {
         SYSTEM_ROUTES.TESTERS.SRR_MATCHER,
         'post',
         'Test SRR Matcher',
+        { scope: 'test-srr-matcher', kind: 'write' },
     );
     export const RequestSchema = z.object({
         responseRules: ResponseRulesConfigSchema,

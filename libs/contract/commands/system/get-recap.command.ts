@@ -11,6 +11,7 @@ export namespace GetRecapCommand {
         SYSTEM_ROUTES.STATS.RECAP,
         'get',
         'Get Recap',
+        { scope: 'recap', kind: 'read' },
     );
 
     export const ResponseSchema = z.object({

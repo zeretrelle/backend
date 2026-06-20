@@ -12,6 +12,7 @@ export namespace ReorderNodeCommand {
         NODES_ROUTES.ACTIONS.REORDER,
         'post',
         'Reorder nodes',
+        { scope: 'reorder', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

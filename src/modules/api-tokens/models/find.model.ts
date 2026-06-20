@@ -5,6 +5,7 @@ export class FindAllApiTokensResponseModel {
         createdAt: Date;
         token: string;
         tokenName: string;
+        scopes: string[];
         updatedAt: Date;
         uuid: string;
     }[];
@@ -24,6 +25,7 @@ export class FindAllApiTokensResponseModel {
                 uuid: data.uuid,
                 token: data.token,
                 tokenName: data.tokenName,
+                scopes: data.scopes,
                 createdAt: data.createdAt,
                 updatedAt: data.updatedAt,
             },

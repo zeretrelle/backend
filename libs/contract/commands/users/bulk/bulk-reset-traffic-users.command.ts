@@ -11,6 +11,7 @@ export namespace BulkResetTrafficUsersCommand {
         USERS_ROUTES.BULK.RESET_TRAFFIC,
         'post',
         'Bulk reset traffic users by UUIDs',
+        { scope: 'bulk-reset-traffic', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

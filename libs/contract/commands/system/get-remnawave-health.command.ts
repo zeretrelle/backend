@@ -11,6 +11,7 @@ export namespace GetRemnawaveHealthCommand {
         SYSTEM_ROUTES.HEALTH,
         'get',
         'Get Remnawave Health',
+        { scope: 'remnawave-health', kind: 'read' },
     );
 
     export const ResponseSchema = z.object({

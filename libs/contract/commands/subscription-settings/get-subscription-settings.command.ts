@@ -12,6 +12,7 @@ export namespace GetSubscriptionSettingsCommand {
         SUBSCRIPTION_SETTINGS_ROUTES.GET,
         'get',
         'Get subscription settings',
+        { scope: 'get', kind: 'read' },
     );
 
     export const ResponseSchema = z.object({

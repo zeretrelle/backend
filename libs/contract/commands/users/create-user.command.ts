@@ -12,6 +12,7 @@ export namespace CreateUserCommand {
         USERS_ROUTES.CREATE,
         'post',
         'Create a new user',
+        { scope: 'create', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

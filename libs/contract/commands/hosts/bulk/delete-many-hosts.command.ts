@@ -12,6 +12,7 @@ export namespace BulkDeleteHostsCommand {
         HOSTS_ROUTES.BULK.DELETE_HOSTS,
         'post',
         'Delete hosts by UUIDs',
+        { scope: 'bulk-delete', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

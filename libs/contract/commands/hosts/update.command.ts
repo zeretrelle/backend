@@ -18,6 +18,7 @@ export namespace UpdateHostCommand {
         HOSTS_ROUTES.UPDATE,
         'patch',
         'Update a host',
+        { scope: 'update', kind: 'write' },
     );
 
     export const RequestSchema = HostsSchema.pick({

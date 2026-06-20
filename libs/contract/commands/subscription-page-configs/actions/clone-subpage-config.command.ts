@@ -12,6 +12,7 @@ export namespace CloneSubscriptionPageConfigCommand {
         SUBSCRIPTION_PAGE_CONFIGS_ROUTES.ACTIONS.CLONE,
         'post',
         'Clone subscription page config',
+        { scope: 'clone', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

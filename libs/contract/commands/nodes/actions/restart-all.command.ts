@@ -11,6 +11,7 @@ export namespace RestartAllNodesCommand {
         NODES_ROUTES.ACTIONS.RESTART_ALL,
         'post',
         'Restart all nodes',
+        { scope: 'restart-all', kind: 'write' },
     );
 
     export const RequestBodySchema = z.object({

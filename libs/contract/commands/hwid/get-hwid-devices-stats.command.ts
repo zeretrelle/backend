@@ -11,6 +11,7 @@ export namespace GetHwidDevicesStatsCommand {
         HWID_ROUTES.STATS,
         'get',
         'Get HWID devices stats',
+        { scope: 'stats', kind: 'read' },
     );
 
     export const ResponseSchema = z.object({

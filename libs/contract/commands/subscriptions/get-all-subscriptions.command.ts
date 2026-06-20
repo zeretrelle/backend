@@ -11,6 +11,7 @@ export namespace GetAllSubscriptionsCommand {
         SUBSCRIPTIONS_ROUTES.GET,
         'get',
         'Get all subscriptions',
+        { scope: 'list', kind: 'read' },
     );
 
     export const RequestQuerySchema = z.object({

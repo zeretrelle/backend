@@ -12,6 +12,7 @@ export namespace GetSubscriptionRequestHistoryCommand {
         SUBSCRIPTION_REQUEST_HISTORY_ROUTES.GET,
         'get',
         'Get all subscription request history',
+        { scope: 'list', kind: 'read' },
     );
 
     export const RequestQuerySchema = TanstackQueryRequestQuerySchema;

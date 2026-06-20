@@ -11,6 +11,7 @@ export namespace RegisterCommand {
         AUTH_ROUTES.REGISTER,
         'post',
         'Register as superadmin',
+        { scope: 'register', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

@@ -12,6 +12,7 @@ export namespace GetRawSubscriptionByShortUuidCommand {
         SUBSCRIPTIONS_ROUTES.GET_BY.SHORT_UUID_RAW(':shortUuid'),
         'get',
         'Get Raw Subscription by Short UUID',
+        { scope: 'raw', kind: 'read' },
     );
 
     export const RequestSchema = z.object({

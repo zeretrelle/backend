@@ -12,6 +12,7 @@ export namespace CreateSubscriptionPageConfigCommand {
         SUBSCRIPTION_PAGE_CONFIGS_ROUTES.CREATE,
         'post',
         'Create subscription page config',
+        { scope: 'create', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

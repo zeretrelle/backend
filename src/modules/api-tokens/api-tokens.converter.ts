@@ -15,6 +15,7 @@ const entityToModel = (entity: ApiTokenEntity): ApiTokens => {
         uuid: entity.uuid,
         token: entity.token,
         tokenName: entity.tokenName,
+        scopes: entity.scopes,
 
         createdAt: entity.createdAt,
         updatedAt: entity.updatedAt,

@@ -12,6 +12,7 @@ export namespace GetSubscriptionByUsernameCommand {
         SUBSCRIPTIONS_ROUTES.GET_BY.USERNAME(':username'),
         'get',
         'Get subscription by username',
+        { scope: 'by-username', kind: 'read' },
     );
 
     export const RequestSchema = z.object({

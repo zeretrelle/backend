@@ -12,6 +12,7 @@ export namespace DeleteInfraBillingHistoryRecordCommand {
         INFRA_BILLING_ROUTES.DELETE_BILLING_HISTORY(':uuid'),
         'delete',
         'Delete infra billing history',
+        { scope: 'delete-bill-record', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

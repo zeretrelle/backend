@@ -12,6 +12,7 @@ export namespace GetInboundsByProfileUuidCommand {
         CONFIG_PROFILES_ROUTES.GET_INBOUNDS_BY_PROFILE_UUID(':uuid'),
         'get',
         'Get inbounds by profile uuid',
+        { scope: 'list-profile-inbounds', kind: 'read' },
     );
 
     export const RequestSchema = z.object({

@@ -12,6 +12,7 @@ export namespace GetUserByUuidCommand {
         USERS_ROUTES.GET_BY_UUID(':uuid'),
         'get',
         'Get user by UUID',
+        { scope: 'by-uuid', kind: 'read' },
     );
 
     export const RequestSchema = z.object({

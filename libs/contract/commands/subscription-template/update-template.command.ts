@@ -12,6 +12,7 @@ export namespace UpdateSubscriptionTemplateCommand {
         SUBSCRIPTION_TEMPLATE_ROUTES.UPDATE,
         'patch',
         'Update subscription template',
+        { scope: 'update', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

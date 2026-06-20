@@ -12,6 +12,7 @@ export namespace GetStatsCommand {
         SYSTEM_ROUTES.STATS.SYSTEM_STATS,
         'get',
         'Get Stats',
+        { scope: 'stats', kind: 'read' },
     );
 
     export const RequestQuerySchema = z.object({

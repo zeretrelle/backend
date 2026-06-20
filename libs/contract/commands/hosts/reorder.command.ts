@@ -12,6 +12,7 @@ export namespace ReorderHostCommand {
         HOSTS_ROUTES.ACTIONS.REORDER,
         'post',
         'Reorder hosts',
+        { scope: 'reorder', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

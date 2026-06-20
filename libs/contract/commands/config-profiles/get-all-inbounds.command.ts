@@ -12,6 +12,7 @@ export namespace GetAllInboundsCommand {
         CONFIG_PROFILES_ROUTES.GET_ALL_INBOUNDS,
         'get',
         'Get all inbounds from all config profiles',
+        { scope: 'list-inbounds', kind: 'read' },
     );
 
     export const ResponseSchema = z.object({

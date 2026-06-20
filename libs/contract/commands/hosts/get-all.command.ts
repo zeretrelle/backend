@@ -8,7 +8,10 @@ export namespace GetAllHostsCommand {
     export const url = REST_API.HOSTS.GET;
     export const TSQ_url = url;
 
-    export const endpointDetails = getEndpointDetails(HOSTS_ROUTES.GET, 'get', 'Get all hosts');
+    export const endpointDetails = getEndpointDetails(HOSTS_ROUTES.GET, 'get', 'Get all hosts', {
+        scope: 'list',
+        kind: 'read',
+    });
 
     export const ResponseSchema = z.object({
         response: z.array(HostsSchema),

@@ -12,6 +12,7 @@ export namespace CreateSubscriptionTemplateCommand {
         SUBSCRIPTION_TEMPLATE_ROUTES.CREATE,
         'post',
         'Create subscription template',
+        { scope: 'create', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

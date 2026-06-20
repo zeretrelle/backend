@@ -17,6 +17,7 @@ export namespace UpdateSubscriptionSettingsCommand {
         SUBSCRIPTION_SETTINGS_ROUTES.UPDATE,
         'patch',
         'Update subscription settings',
+        { scope: 'update', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

@@ -12,6 +12,7 @@ export namespace UpdateSubscriptionPageConfigCommand {
         SUBSCRIPTION_PAGE_CONFIGS_ROUTES.UPDATE,
         'patch',
         'Update subscription page config',
+        { scope: 'update', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

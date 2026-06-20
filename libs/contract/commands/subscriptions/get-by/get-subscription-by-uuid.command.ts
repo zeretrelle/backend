@@ -12,6 +12,7 @@ export namespace GetSubscriptionByUuidCommand {
         SUBSCRIPTIONS_ROUTES.GET_BY.UUID(':uuid'),
         'get',
         'Get subscription by uuid',
+        { scope: 'by-uuid', kind: 'read' },
     );
 
     export const RequestSchema = z.object({

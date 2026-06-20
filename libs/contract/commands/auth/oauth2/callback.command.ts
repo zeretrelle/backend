@@ -11,6 +11,7 @@ export namespace OAuth2CallbackCommand {
         AUTH_ROUTES.OAUTH2.CALLBACK,
         'post',
         'Callback from OAuth2',
+        { scope: 'callback', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

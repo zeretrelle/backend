@@ -12,6 +12,7 @@ export namespace FindAllApiTokensCommand {
         API_TOKENS_ROUTES.GET,
         'get',
         'Get all API tokens',
+        { scope: 'list', kind: 'read' },
         'This endpoint is forbidden to use via "API-key". It can only be used with admin JWT-token.',
     );
 

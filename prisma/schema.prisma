@@ -104,9 +104,10 @@ model UserTraffic {
 }
 
 model ApiTokens {
-  uuid      String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  token     String @unique @map("token")
-  tokenName String @map("token_name")
+  uuid      String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  token     String   @unique @map("token")
+  tokenName String   @map("token_name")
+  scopes    String[] @default(["*"]) @map("scopes")
 
   createdAt DateTime @default(dbgenerated("now()")) @map("created_at")
   updatedAt DateTime @default(dbgenerated("now()")) @updatedAt @map("updated_at")

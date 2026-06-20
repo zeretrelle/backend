@@ -12,8 +12,10 @@ import { HttpExceptionFilter } from '@common/exception/http-exception.filter';
 import { JwtDefaultGuard } from '@common/guards/jwt-guards/def-jwt-guard';
 import { errorHandler } from '@common/helpers/error-handler.helper';
 import { RolesGuard } from '@common/guards/roles/roles.guard';
+import { ApiScopeResource } from '@common/decorators/scopes';
 import { Endpoint } from '@common/decorators/base-endpoint';
 import { Roles } from '@common/decorators/roles/roles';
+import { ScopesGuard } from '@common/guards/scopes';
 import {
     CreateHostCommand,
     DeleteHostCommand,
@@ -44,9 +46,10 @@ import { GetAllHostTagsResponseModel, HostResponseModel } from '../models';
 import { HostsService } from '../hosts.service';
 
 @ApiBearerAuth('Authorization')
+@ApiScopeResource(CONTROLLERS_INFO.HOSTS.resource)
 @ApiTags(CONTROLLERS_INFO.HOSTS.tag)
 @Roles(ROLE.ADMIN, ROLE.API)
-@UseGuards(JwtDefaultGuard, RolesGuard)
+@UseGuards(JwtDefaultGuard, RolesGuard, ScopesGuard)
 @UseFilters(HttpExceptionFilter)
 @Controller(HOSTS_CONTROLLER)
 export class HostsController {

@@ -11,6 +11,7 @@ export namespace GetUserSubscriptionRequestHistoryCommand {
         USERS_ROUTES.SUBSCRIPTION_REQUEST_HISTORY(':uuid'),
         'get',
         'Get user subscription request history, recent 24 records',
+        { scope: 'subscription-request-history', kind: 'read' },
     );
 
     export const RequestSchema = z.object({

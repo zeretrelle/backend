@@ -12,6 +12,7 @@ export namespace GetSubscriptionInfoByShortUuidCommand {
         SUBSCRIPTION_ROUTES.GET_INFO(':shortUuid'),
         'get',
         'Get Subscription Info by Short UUID',
+        { scope: 'get', kind: 'read' },
     );
 
     export const RequestSchema = z.object({

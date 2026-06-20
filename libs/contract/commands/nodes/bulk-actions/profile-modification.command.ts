@@ -11,6 +11,7 @@ export namespace BulkNodesProfileModificationCommand {
         NODES_ROUTES.BULK_ACTIONS.PROFILE_MODIFICATION,
         'post',
         'Modify Inbounds & Profile for many nodes',
+        { scope: 'bulk-profile-modification', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

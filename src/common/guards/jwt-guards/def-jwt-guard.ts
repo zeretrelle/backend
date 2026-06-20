@@ -39,7 +39,7 @@ export class JwtDefaultGuard extends AuthGuard('registeredUserJWT') {
 
         switch (user.role) {
             case ROLE.API: {
-                return await this.verifyApiToken(user.uuid);
+                return await this.verifyApiToken(user, user.uuid);
             }
 
             case ROLE.ADMIN: {
@@ -88,9 +88,10 @@ export class JwtDefaultGuard extends AuthGuard('registeredUserJWT') {
         );
     }
 
-    private async verifyApiToken(apiTokenUuid: string): Promise<boolean> {
-        const cached = await this.rawCacheService.get<string>(`api:${apiTokenUuid}`);
+    private async verifyApiToken(user: IJWTAuthPayload, apiTokenUuid: string): Promise<boolean> {
+        const cached = await this.rawCacheService.get<string[]>(`api:${apiTokenUuid}`);
         if (cached) {
+            user.scopes = cached;
             return true;
         }
 
@@ -99,7 +100,10 @@ export class JwtDefaultGuard extends AuthGuard('registeredUserJWT') {
             return false;
         }
 
-        await this.rawCacheService.set(`api:${apiTokenUuid}`, '1', 3600);
+        const scopes = token.response.scopes ?? [];
+
+        await this.rawCacheService.set(`api:${apiTokenUuid}`, scopes, 3600);
+        user.scopes = scopes;
         return true;
     }
 }

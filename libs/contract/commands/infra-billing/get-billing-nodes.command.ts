@@ -12,6 +12,7 @@ export namespace GetInfraBillingNodesCommand {
         INFRA_BILLING_ROUTES.GET_BILLING_NODES,
         'get',
         'Get infra billing nodes',
+        { scope: 'list-billing-nodes', kind: 'read' },
     );
 
     export const ResponseSchema = z.object({

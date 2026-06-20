@@ -11,6 +11,7 @@ export namespace GetUserAccessibleNodesCommand {
         USERS_ROUTES.ACCESSIBLE_NODES(':uuid'),
         'get',
         'Get user accessible nodes',
+        { scope: 'accessible-nodes', kind: 'read' },
     );
 
     export const RequestSchema = z.object({

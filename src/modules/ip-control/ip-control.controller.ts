@@ -10,8 +10,10 @@ import { Body, Controller, HttpStatus, Param, UseFilters, UseGuards } from '@nes
 import { HttpExceptionFilter } from '@common/exception/http-exception.filter';
 import { JwtDefaultGuard } from '@common/guards/jwt-guards/def-jwt-guard';
 import { errorHandler } from '@common/helpers/error-handler.helper';
+import { ApiScopeResource } from '@common/decorators/scopes';
 import { Endpoint } from '@common/decorators/base-endpoint';
 import { Roles } from '@common/decorators/roles/roles';
+import { ScopesGuard } from '@common/guards/scopes';
 import { RolesGuard } from '@common/guards/roles';
 import {
     DropConnectionsCommand,
@@ -38,9 +40,10 @@ import {
 import { IpControlService } from './ip-control.service';
 
 @ApiBearerAuth('Authorization')
+@ApiScopeResource(CONTROLLERS_INFO.IP_CONTROL.resource)
 @ApiTags(CONTROLLERS_INFO.IP_CONTROL.tag)
 @Roles(ROLE.ADMIN, ROLE.API)
-@UseGuards(JwtDefaultGuard, RolesGuard)
+@UseGuards(JwtDefaultGuard, RolesGuard, ScopesGuard)
 @UseFilters(HttpExceptionFilter)
 @Controller(IP_CONTROL_CONTROLLER)
 export class IpControlController {

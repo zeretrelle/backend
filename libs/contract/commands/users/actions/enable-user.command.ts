@@ -12,6 +12,7 @@ export namespace EnableUserCommand {
         USERS_ROUTES.ACTIONS.ENABLE(':uuid'),
         'post',
         'Enable user',
+        { scope: 'enable', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

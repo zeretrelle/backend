@@ -11,6 +11,7 @@ export namespace ResetNodeTrafficCommand {
         NODES_ROUTES.ACTIONS.RESET_TRAFFIC(':uuid'),
         'post',
         'Reset Node Traffic',
+        { scope: 'reset-traffic', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

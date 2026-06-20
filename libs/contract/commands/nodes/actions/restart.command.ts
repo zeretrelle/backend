@@ -11,6 +11,7 @@ export namespace RestartNodeCommand {
         NODES_ROUTES.ACTIONS.RESTART(':uuid'),
         'post',
         'Restart node',
+        { scope: 'restart', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

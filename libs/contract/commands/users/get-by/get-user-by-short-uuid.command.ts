@@ -12,6 +12,7 @@ export namespace GetUserByShortUuidCommand {
         USERS_ROUTES.GET_BY.SHORT_UUID(':shortUuid'),
         'get',
         'Get user by Short UUID',
+        { scope: 'by-short-uuid', kind: 'read' },
     );
 
     export const RequestSchema = z.object({

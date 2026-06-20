@@ -18,6 +18,7 @@ export namespace UpdateRemnawaveSettingsCommand {
         REMNAAWAVE_SETTINGS_ROUTES.UPDATE,
         'patch',
         'Update Remnawave settings',
+        { scope: 'update', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

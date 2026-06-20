@@ -13,6 +13,7 @@ export namespace BulkAllUpdateUsersCommand {
         USERS_ROUTES.BULK.ALL.UPDATE,
         'post',
         'Bulk update all users',
+        { scope: 'bulk-all-update-users', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

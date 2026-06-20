@@ -12,6 +12,7 @@ export namespace CreateInfraBillingHistoryRecordCommand {
         INFRA_BILLING_ROUTES.CREATE_BILLING_HISTORY,
         'post',
         'Create infra billing history',
+        { scope: 'create-bill-record', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

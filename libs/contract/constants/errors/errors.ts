@@ -1139,4 +1139,9 @@ export const ERRORS = {
         message: 'Update hosts error',
         httpCode: 500,
     },
+    INVALID_API_TOKEN_SCOPE: {
+        code: 'A229',
+        message: 'One or more provided API token scopes are invalid',
+        httpCode: 400,
+    },
 } as const;

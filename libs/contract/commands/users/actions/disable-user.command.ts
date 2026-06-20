@@ -12,6 +12,7 @@ export namespace DisableUserCommand {
         USERS_ROUTES.ACTIONS.DISABLE(':uuid'),
         'post',
         'Disable user',
+        { scope: 'disable', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

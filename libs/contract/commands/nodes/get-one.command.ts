@@ -12,6 +12,7 @@ export namespace GetOneNodeCommand {
         NODES_ROUTES.GET_BY_UUID(':uuid'),
         'get',
         'Get node by UUID',
+        { scope: 'get', kind: 'read' },
     );
 
     export const RequestSchema = z.object({

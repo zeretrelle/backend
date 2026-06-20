@@ -12,6 +12,7 @@ export namespace GetBandwidthStatsCommand {
         SYSTEM_ROUTES.STATS.BANDWIDTH_STATS,
         'get',
         'Get Bandwidth Stats',
+        { scope: 'bandwidth-stats', kind: 'read' },
     );
 
     export const RequestQuerySchema = z.object({

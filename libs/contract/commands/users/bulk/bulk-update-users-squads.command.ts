@@ -11,6 +11,7 @@ export namespace BulkUpdateUsersSquadsCommand {
         USERS_ROUTES.BULK.UPDATE_SQUADS,
         'post',
         'Bulk update users internal squads by UUIDs',
+        { scope: 'bulk-update-squads', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

@@ -11,6 +11,7 @@ export namespace GenerateX25519Command {
         SYSTEM_ROUTES.TOOLS.GENERATE_X25519,
         'get',
         'Generate 30 X25519 keypairs',
+        { scope: 'generate-x25519', kind: 'read' },
     );
 
     export const ResponseSchema = z.object({

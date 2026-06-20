@@ -11,6 +11,7 @@ export namespace DeleteUserCommand {
         USERS_ROUTES.DELETE(':uuid'),
         'delete',
         'Delete user',
+        { scope: 'delete', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

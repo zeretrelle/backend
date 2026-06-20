@@ -11,6 +11,7 @@ export namespace BulkDeleteUsersCommand {
         USERS_ROUTES.BULK.DELETE,
         'post',
         'Bulk delete users by UUIDs',
+        { scope: 'bulk-delete', kind: 'write' },
     );
 
     export const RequestSchema = z.object({

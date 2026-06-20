@@ -12,6 +12,7 @@ export namespace GetAllHwidDevicesCommand {
         HWID_ROUTES.GET_ALL_HWID_DEVICES,
         'get',
         'Get all HWID devices',
+        { scope: 'list', kind: 'read' },
     );
 
     export const RequestQuerySchema = TanstackQueryRequestQuerySchema;

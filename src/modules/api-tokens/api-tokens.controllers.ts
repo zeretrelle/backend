@@ -11,6 +11,7 @@ import {
     CreateApiTokenCommand,
     DeleteApiTokenCommand,
     FindAllApiTokensCommand,
+    GetApiTokenScopesCommand,
 } from '@libs/contracts/commands';
 import { API_TOKENS_CONTROLLER, CONTROLLERS_INFO } from '@libs/contracts/api';
 import { ROLE } from '@libs/contracts/constants';
@@ -21,6 +22,7 @@ import {
     DeleteApiTokenRequestDto,
     DeleteApiTokenResponseDto,
     FindAllApiTokensResponseDto,
+    GetApiTokenScopesResponseDto,
 } from './dtos';
 import { ApiTokensService } from './api-tokens.service';
 import { CreateApiTokenResponseModel } from './models';
@@ -68,6 +70,23 @@ export class ApiTokensController {
         const data = errorHandler(result);
         return {
             response: data.result,
+        };
+    }
+
+    @ApiResponse({
+        status: 200,
+        description: 'Available API token scopes fetched successfully',
+        type: GetApiTokenScopesResponseDto,
+    })
+    @Endpoint({
+        command: GetApiTokenScopesCommand,
+        httpCode: HttpStatus.OK,
+    })
+    async getScopes(): Promise<GetApiTokenScopesResponseDto> {
+        const result = this.apiTokensService.getAvailableScopes();
+        const data = errorHandler(result);
+        return {
+            response: data,
         };
     }
 
