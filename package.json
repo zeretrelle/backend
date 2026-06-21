@@ -100,11 +100,11 @@
     "helmet": "^8.2.0",
     "husky": "9.1.7",
     "hygen": "^6.2.11",
-    "ioredis": "5.10.1",
+    "ioredis": "5.11.1",
     "jsonwebtoken": "^9.0.3",
     "kysely": "^0.28.11",
     "morgan": "^1.11.0",
-    "nanoid": "5.1.11",
+    "nanoid": "5.1.15",
     "nest-winston": "^1.10.2",
     "nestjs-cls": "^6.1.0",
     "nestjs-zod": "4.3.1",
@@ -123,7 +123,7 @@
     "proxy-agent": "8.0.2",
     "reflect-metadata": "0.2.2",
     "rxjs": "7.8.2",
-    "semver": "^7.8.4",
+    "semver": "^7.8.5",
     "socks-proxy-agent": "10.1.0",
     "superjson": "2.2.6",
     "swagger-themes": "^1.4.3",
@@ -172,5 +172,8 @@
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.49.0",
     "zod-to-json-schema": "^3.25.0"
+  },
+  "overrides": {
+    "multer": "2.2.0"
   }
 }
