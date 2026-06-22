@@ -20,7 +20,7 @@ import { NODES_JOB_NAMES } from '../constants';
         scope: Scope.REQUEST,
     },
     {
-        concurrency: 5,
+        concurrency: 10,
     },
 )
 export class QueryNodesQueueProcessor extends WorkerHost {
