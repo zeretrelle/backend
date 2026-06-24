@@ -4,6 +4,8 @@ import { RawCacheService } from '@common/raw-cache';
 import { fail, ok, TResult } from '@common/types';
 import { CACHE_KEYS, ERRORS } from '@libs/contracts/constants';
 
+import { ResponseRulesParserService } from '@modules/subscription-response-rules/services/response-rules-parser.service';
+
 import { SubscriptionSettingsRepository } from './repositories/subscription-settings.repository';
 import { SubscriptionSettingsEntity } from './entities/subscription-settings.entity';
 import { UpdateSubscriptionSettingsRequestDto } from './dtos';
@@ -14,6 +16,7 @@ export class SubscriptionSettingsService {
 
     constructor(
         private readonly rawCacheService: RawCacheService,
+        private readonly srrParser: ResponseRulesParserService,
         private readonly subscriptionSettingsRepository: SubscriptionSettingsRepository,
     ) {}
 
@@ -40,6 +43,18 @@ export class SubscriptionSettingsService {
 
             if (!settings) {
                 return fail(ERRORS.SUBSCRIPTION_SETTINGS_NOT_FOUND);
+            }
+
+            if (dto.responseRules) {
+                try {
+                    dto.responseRules = await this.srrParser.parseConfig(dto.responseRules);
+                } catch (error) {
+                    return fail(
+                        ERRORS.CONFIG_VALIDATION_ERROR.withMessage(
+                            error instanceof Error ? error.message : 'Unknown error',
+                        ),
+                    );
+                }
             }
 
             const updatedSettings = await this.subscriptionSettingsRepository.update({
