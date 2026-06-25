@@ -20,12 +20,12 @@ export namespace GetHwidDevicesStatsCommand {
                 z.object({
                     platform: z.string(),
                     count: z.number(),
-                }),
-            ),
-            byApp: z.array(
-                z.object({
-                    app: z.string(),
-                    count: z.number(),
+                    byApp: z.array(
+                        z.object({
+                            app: z.string(),
+                            count: z.number(),
+                        }),
+                    ),
                 }),
             ),
             stats: z.object({

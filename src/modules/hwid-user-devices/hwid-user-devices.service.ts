@@ -253,7 +253,6 @@ export class HwidUserDevicesService {
             return ok(
                 new GetHwidDevicesStatsResponseModel({
                     byPlatform: stats.byPlatform,
-                    byApp: stats.byApp,
                     stats: stats.stats,
                 }),
             );

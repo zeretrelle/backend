@@ -182,31 +182,25 @@ export class HwidUserDevicesRepository implements Omit<
     }
 
     public async getHwidDevicesStats(): Promise<{
-        byPlatform: { platform: string; count: number }[];
-        byApp: { app: string; count: number }[];
+        byPlatform: {
+            platform: string;
+            count: number;
+            byApp: { app: string; count: number }[];
+        }[];
         stats: {
             totalUniqueDevices: number;
             totalHwidDevices: number;
             averageHwidDevicesPerUser: number;
         };
     }> {
-        const platformStats = await this.qb.kysely
-            .selectFrom('hwidUserDevices')
-            .select(['platform', (eb) => eb.fn.count('hwid').as('count')])
-            .where('platform', 'is not', null)
-            .groupBy('platform')
-            .orderBy('count', 'desc')
-            .execute();
-
-        const appStats = await this.qb.kysely
+        const platformAppStats = await this.qb.kysely
             .selectFrom('hwidUserDevices')
             .select([
+                'platform',
                 sql<string>`SPLIT_PART("user_agent", '/', 1)`.as('app'),
                 (eb) => eb.fn.count('hwid').as('count'),
             ])
-            .where('userAgent', 'is not', null)
-            .groupBy(sql`SPLIT_PART("user_agent", '/', 1)`)
-            .orderBy('count', 'desc')
+            .groupBy(['platform', sql`SPLIT_PART("user_agent", '/', 1)`])
             .execute();
 
         const totalStats = await this.qb.kysely
@@ -218,6 +212,36 @@ export class HwidUserDevicesRepository implements Omit<
             ])
             .executeTakeFirstOrThrow();
 
+        const platformMap = new Map<string, { count: number; apps: Map<string, number> }>();
+
+        for (const row of platformAppStats) {
+            const platform = row.platform || 'Unknown';
+            const count = Number(row.count);
+
+            let entry = platformMap.get(platform);
+            if (!entry) {
+                entry = { count: 0, apps: new Map() };
+                platformMap.set(platform, entry);
+            }
+
+            entry.count += count;
+
+            const app = row.app;
+            if (!app.startsWith('https:')) {
+                entry.apps.set(app, (entry.apps.get(app) ?? 0) + count);
+            }
+        }
+
+        const byPlatform = Array.from(platformMap.entries())
+            .map(([platform, entry]) => ({
+                platform,
+                count: entry.count,
+                byApp: Array.from(entry.apps.entries())
+                    .map(([app, count]) => ({ app, count }))
+                    .sort((a, b) => b.count - a.count),
+            }))
+            .sort((a, b) => b.count - a.count);
+
         let averageHwidDevicesPerUser = 0;
         if (Number(totalStats.totalUsers) > 0) {
             averageHwidDevicesPerUser =
@@ -225,16 +249,7 @@ export class HwidUserDevicesRepository implements Omit<
         }
 
         return {
-            byPlatform: platformStats.map((stat) => ({
-                platform: stat.platform || 'Unknown',
-                count: Number(stat.count),
-            })),
-            byApp: appStats
-                .filter((stat) => !stat.app.startsWith('https:'))
-                .map((stat) => ({
-                    app: stat.app,
-                    count: Number(stat.count),
-                })),
+            byPlatform,
             stats: {
                 totalUniqueDevices: Number(totalStats.totalUniqueDevices),
                 totalHwidDevices: Number(totalStats.totalHwidDevices),
