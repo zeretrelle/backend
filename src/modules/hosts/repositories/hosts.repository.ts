@@ -172,36 +172,46 @@ export class HostsRepository implements ICrud<HostsEntity> {
     ): Promise<HostWithRawInbound[]> {
         const hosts = await this.qb.kysely
             .selectFrom('hosts')
-            .distinct()
-            .innerJoin(
-                'internalSquadInbounds',
-                'internalSquadInbounds.inboundUuid',
-                'hosts.configProfileInboundUuid',
-            )
-            .innerJoin(
-                'internalSquadMembers',
-                'internalSquadMembers.internalSquadUuid',
-                'internalSquadInbounds.internalSquadUuid',
-            )
+            .selectAll('hosts')
             .where((eb) =>
-                eb.not(
-                    eb.exists(
-                        eb
-                            .selectFrom('internalSquadHostExclusions')
-                            .whereRef('internalSquadHostExclusions.hostUuid', '=', 'hosts.uuid')
-                            .whereRef(
-                                'internalSquadHostExclusions.squadUuid',
-                                '=',
-                                'internalSquadInbounds.internalSquadUuid',
-                            )
-                            .select(eb.val(1).as('one')),
-                    ),
+                eb.exists(
+                    eb
+                        .selectFrom('internalSquadInbounds')
+                        .innerJoin(
+                            'internalSquadMembers',
+                            'internalSquadMembers.internalSquadUuid',
+                            'internalSquadInbounds.internalSquadUuid',
+                        )
+                        .whereRef(
+                            'internalSquadInbounds.inboundUuid',
+                            '=',
+                            'hosts.configProfileInboundUuid',
+                        )
+                        .where('internalSquadMembers.userId', '=', userId)
+                        .where((eb2) =>
+                            eb2.not(
+                                eb2.exists(
+                                    eb2
+                                        .selectFrom('internalSquadHostExclusions')
+                                        .whereRef(
+                                            'internalSquadHostExclusions.hostUuid',
+                                            '=',
+                                            'hosts.uuid',
+                                        )
+                                        .whereRef(
+                                            'internalSquadHostExclusions.squadUuid',
+                                            '=',
+                                            'internalSquadInbounds.internalSquadUuid',
+                                        )
+                                        .select(eb2.val(1).as('one')),
+                                ),
+                            ),
+                        )
+                        .select(eb.val(1).as('one')),
                 ),
             )
             .$if(!returnDisabledHosts, (eb) => eb.where('hosts.isDisabled', '=', false))
             .$if(!returnHiddenHosts, (eb) => eb.where('hosts.isHidden', '=', false))
-            .where('internalSquadMembers.userId', '=', userId)
-            .selectAll('hosts')
             .orderBy('hosts.viewPosition', 'asc')
             .execute();
 
