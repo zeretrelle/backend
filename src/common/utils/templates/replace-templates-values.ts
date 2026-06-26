@@ -107,6 +107,7 @@ export class TemplateEngine {
                     ? user.hwidDeviceLimit
                     : (subscriptionSettings.hwidSettings.fallbackDeviceLimit ?? 0)
                 ).toString(),
+            DESCRIPTION: () => user.description ?? '',
         };
     }
 
