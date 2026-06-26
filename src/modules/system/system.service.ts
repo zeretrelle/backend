@@ -1,5 +1,4 @@
 import { ERRORS, INTERNAL_CACHE_KEYS } from '@contract/constants';
-import { createHappCryptoLink } from '@kastov/cryptohapp';
 import { encodeURLSafe } from '@stablelib/base64';
 import { generateKeyPair } from '@stablelib/x25519';
 import axios, { AxiosError } from 'axios';
@@ -270,16 +269,6 @@ export class SystemService implements OnApplicationBootstrap {
             this.logger.error('Error getting x25519 keypairs:', error);
             return fail(ERRORS.INTERNAL_SERVER_ERROR);
         }
-    }
-
-    public async encryptHappCryptoLink(linkToEncrypt: string): Promise<TResult<string>> {
-        const encryptedLink = createHappCryptoLink(linkToEncrypt, 'v4', true);
-
-        if (!encryptedLink) {
-            return fail(ERRORS.INTERNAL_SERVER_ERROR);
-        }
-
-        return ok(encryptedLink);
     }
 
     public async debugSrrMatcher(

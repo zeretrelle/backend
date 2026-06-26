@@ -10,13 +10,7 @@ import {
     UseFilters,
     UseGuards,
 } from '@nestjs/common';
-import {
-    ApiBearerAuth,
-    ApiCreatedResponse,
-    ApiOkResponse,
-    ApiResponse,
-    ApiTags,
-} from '@nestjs/swagger';
+import { ApiBearerAuth, ApiCreatedResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { Endpoint } from '@common/decorators/base-endpoint';
 import { Roles } from '@common/decorators/roles/roles';
@@ -28,7 +22,6 @@ import { ScopesGuard } from '@common/guards/scopes';
 import { errorHandler } from '@common/helpers/error-handler.helper';
 import { CONTROLLERS_INFO, SYSTEM_CONTROLLER } from '@libs/contracts/api';
 import {
-    EncryptHappCryptoLinkCommand,
     GenerateX25519Command,
     GetBandwidthStatsCommand,
     GetMetadataCommand,
@@ -49,14 +42,11 @@ import {
     GetRemnawaveHealthResponseDto,
     GetStatsResponseDto,
     GenerateX25519ResponseDto,
-    EncryptHappCryptoLinkResponseDto,
-    EncryptHappCryptoLinkRequestDto,
     DebugSrrMatcherRequestDto,
     DebugSrrMatcherResponseDto,
     GetMetadataResponseDto,
     GetRecapResponseDto,
 } from './dtos';
-import { EncryptHappCryptoLinkResponseModel } from './models';
 import { SystemService } from './system.service';
 
 @ApiBearerAuth('Authorization')
@@ -194,26 +184,6 @@ export class SystemController {
         const data = errorHandler(result);
         return {
             response: data,
-        };
-    }
-
-    @ApiOkResponse({
-        type: EncryptHappCryptoLinkResponseDto,
-        description: 'Returns encrypted Happ crypto link',
-    })
-    @Endpoint({
-        command: EncryptHappCryptoLinkCommand,
-        httpCode: HttpStatus.OK,
-        apiBody: EncryptHappCryptoLinkRequestDto,
-    })
-    async encryptHappCryptoLink(
-        @Body() body: EncryptHappCryptoLinkRequestDto,
-    ): Promise<EncryptHappCryptoLinkResponseDto> {
-        const result = await this.systemService.encryptHappCryptoLink(body.linkToEncrypt);
-
-        const data = errorHandler(result);
-        return {
-            response: new EncryptHappCryptoLinkResponseModel(data),
         };
     }
 
